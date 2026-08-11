@@ -1,0 +1,21 @@
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) var(--radius-sm);
+}
+
+.card--light {
+  background: var(--color-cream-50);
+}
+
+.card--warm {
+  background: var(--color-cream-100);
+}
+
+.card--olive {
+  background: var(--color-olive-500);
+}
+
+.card--rose {
+  background: var(--color-rose-600);
+  color: var(--color-white);
+}

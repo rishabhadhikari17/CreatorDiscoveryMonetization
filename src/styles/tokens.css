@@ -1,0 +1,51 @@
+:root {
+  /* Brand palette */
+  --color-cream-50: #fff7eb;
+  --color-cream-100: #f9f0e0;
+  --color-olive-500: #a2ab73;
+  --color-rose-600: #cc3a63;
+
+  /* Accessible supporting neutrals derived from the brand palette */
+  --color-ink-900: #29251f;
+  --color-ink-700: #514a40;
+  --color-ink-500: #746c61;
+  --color-white: #ffffff;
+  --color-border: rgba(41, 37, 31, 0.14);
+  --color-olive-700: #59613a;
+  --color-rose-700: #a9274c;
+
+  /* Typography */
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: Inter, "Segoe UI", Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: clamp(1.7rem, 3vw, 2.4rem);
+  --text-display: clamp(3rem, 8vw, 7.25rem);
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+
+  /* Shape and elevation */
+  --radius-sm: 0.65rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-pill: 999px;
+  --shadow-sm: 0 10px 30px rgba(41, 37, 31, 0.08);
+  --shadow-md: 0 24px 70px rgba(41, 37, 31, 0.12);
+
+  /* Layout */
+  --page-max: 1180px;
+  --page-gutter: clamp(1rem, 4vw, 2.5rem);
+}

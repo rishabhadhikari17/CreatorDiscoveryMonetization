@@ -1,0 +1,43 @@
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.field__label {
+  color: var(--color-ink-700);
+  font-size: var(--text-xs);
+  font-weight: 750;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-cream-50);
+  color: var(--color-ink-900);
+  outline: 0;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.field input::placeholder {
+  color: var(--color-ink-500);
+}
+
+.field input:hover,
+.field select:hover {
+  border-color: rgba(41, 37, 31, 0.32);
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--color-rose-600);
+  box-shadow: 0 0 0 4px rgba(204, 58, 99, 0.1);
+}
+
+.field small {
+  color: var(--color-ink-500);
+  font-size: 0.6875rem;
+}

@@ -1,0 +1,9 @@
+.creator-section-page { display: grid; gap: var(--space-7); }
+.creator-section-page > div > h2 { max-width: 760px; margin-top: var(--space-3); font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 500; letter-spacing: -0.06em; line-height: 0.96; }
+.creator-section-page > div > p:last-child { max-width: 670px; margin-top: var(--space-4); color: var(--color-ink-700); }
+.creator-section-page > section { display: grid; min-height: 360px; place-items: center; align-content: center; padding: var(--space-6); border: 1px dashed rgba(41, 37, 31, 0.24); border-radius: var(--radius-lg); background: white; text-align: center; }
+.creator-section-page > section > div { display: grid; width: 4rem; height: 4rem; place-items: center; border-radius: 50%; background: rgba(162, 171, 115, 0.2); color: var(--color-olive-700); }
+.creator-section-page > section > span { margin-top: var(--space-4); color: var(--color-rose-700); font-size: 0.6rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; }
+.creator-section-page > section h3 { margin-top: 0.3rem; font-family: var(--font-display); font-size: 1.5rem; }
+.creator-section-page > section p { max-width: 480px; margin-top: 0.4rem; color: var(--color-ink-700); font-size: var(--text-xs); }
+.creator-section-page > section .button { margin-top: var(--space-5); }

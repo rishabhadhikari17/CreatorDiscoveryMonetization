@@ -1,0 +1,90 @@
+.demo-guide-trigger { position: fixed; bottom: 1rem; left: 1rem; z-index: 40; display: flex; min-height: 44px; align-items: center; gap: 0.4rem; padding: 0.45rem 0.55rem 0.45rem 0.75rem; border: 1px solid rgba(41, 37, 31, 0.16); border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.94); color: var(--color-ink-700); box-shadow: 0 14px 40px rgba(41, 37, 31, 0.14); cursor: pointer; backdrop-filter: blur(14px); font-size: 0.66rem; font-weight: 850; }
+.demo-guide-trigger:hover { color: var(--color-rose-700); transform: translateY(-1px); }
+.demo-guide-trigger small { display: grid; min-width: 2rem; height: 1.55rem; padding-inline: 0.35rem; place-items: center; border-radius: var(--radius-pill); background: var(--color-cream-100); color: var(--color-rose-700); font-size: 0.5rem; }
+
+.demo-guide-backdrop, .demo-confirm-backdrop { position: fixed; inset: 0; z-index: 80; background: rgba(41, 37, 31, 0.46); backdrop-filter: blur(5px); animation: demo-fade-in 160ms ease-out; }
+.demo-guide { position: absolute; inset: 0 0 0 auto; display: flex; width: min(430px, 100%); flex-direction: column; overflow-y: auto; background: #fdf9f2; box-shadow: -20px 0 60px rgba(41, 37, 31, 0.18); animation: demo-slide-in 220ms ease-out; }
+.demo-guide > header { display: flex; align-items: start; justify-content: space-between; gap: var(--space-4); padding: 1.4rem; border-bottom: 1px solid var(--color-border); background: var(--color-ink-900); color: var(--color-cream-50); }
+.demo-guide > header span { color: var(--color-olive-500); font-size: 0.56rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; }
+.demo-guide > header h2 { margin-top: 0.18rem; font-family: var(--font-display); font-size: 1.6rem; }
+.demo-guide > header p { margin-top: 0.25rem; color: rgba(255, 247, 235, 0.52); font-size: 0.58rem; }
+.demo-guide > header button { display: grid; width: 2rem; height: 2rem; place-items: center; flex: 0 0 auto; border: 1px solid rgba(255, 247, 235, 0.14); border-radius: 50%; background: transparent; color: var(--color-cream-50); cursor: pointer; }
+.demo-guide__progress { height: 0.3rem; background: var(--color-cream-100); }
+.demo-guide__progress span { display: block; height: 100%; border-radius: 0 var(--radius-pill) var(--radius-pill) 0; background: var(--color-rose-600); transition: width 320ms ease; }
+.demo-guide ol { display: grid; padding: 0.8rem 1.1rem; }
+.demo-guide li { display: grid; grid-template-columns: auto 1fr auto; gap: 0.7rem; align-items: center; padding: 0.78rem 0.4rem; border-bottom: 1px solid var(--color-border); }
+.demo-guide li > span { display: grid; width: 1.75rem; height: 1.75rem; place-items: center; border: 1px solid var(--color-border); border-radius: 50%; color: var(--color-ink-500); font-size: 0.48rem; font-weight: 900; }
+.demo-guide li.is-current { margin-inline: -0.35rem; padding-inline: 0.75rem; border: 0; border-radius: 0.75rem; background: rgba(204, 58, 99, 0.08); }
+.demo-guide li.is-current > span { border-color: var(--color-rose-600); background: var(--color-rose-600); color: white; }
+.demo-guide li.is-complete > span { border-color: var(--color-olive-500); background: var(--color-olive-500); color: var(--color-ink-900); }
+.demo-guide li strong { font-size: 0.58rem; }
+.demo-guide li p { margin-top: 0.08rem; color: var(--color-ink-500); font-size: 0.49rem; line-height: 1.4; }
+.demo-guide li > a { display: grid; width: 2rem; height: 2rem; place-items: center; border-radius: 50%; color: var(--color-rose-700); transition: background-color 160ms ease, transform 160ms ease; }
+.demo-guide li > a:hover { background: white; transform: translateX(2px); }
+.demo-guide > footer { display: flex; gap: 0.5rem; margin: auto 1.1rem 1.1rem; padding: 0.8rem; border-radius: 0.75rem; background: rgba(162, 171, 115, 0.14); color: var(--color-olive-700); }
+.demo-guide > footer svg { flex: 0 0 auto; }
+.demo-guide > footer p { color: var(--color-ink-700); font-size: 0.5rem; line-height: 1.45; }
+
+.toast-region { position: fixed; top: 1rem; right: 1rem; z-index: 95; display: grid; width: min(360px, calc(100vw - 2rem)); gap: 0.55rem; pointer-events: none; }
+.demo-toast { display: grid; grid-template-columns: auto 1fr auto; gap: 0.6rem; align-items: start; padding: 0.8rem; border: 1px solid rgba(162, 171, 115, 0.45); border-radius: 0.85rem; background: rgba(255, 255, 255, 0.97); color: var(--color-olive-700); box-shadow: 0 18px 50px rgba(41, 37, 31, 0.18); pointer-events: auto; animation: demo-toast-in 220ms ease-out; backdrop-filter: blur(12px); }
+.demo-toast--info { border-color: rgba(204, 58, 99, 0.28); color: var(--color-rose-700); }
+.demo-toast strong { display: block; color: var(--color-ink-900); font-size: 0.58rem; }
+.demo-toast p { margin-top: 0.08rem; color: var(--color-ink-700); font-size: 0.5rem; line-height: 1.4; }
+.demo-toast button { padding: 0; border: 0; background: transparent; color: var(--color-ink-500); cursor: pointer; }
+
+.demo-confirm-backdrop { display: grid; place-items: center; padding: 1rem; }
+.demo-confirm { display: grid; width: min(460px, 100%); grid-template-columns: auto 1fr; gap: 0.8rem; padding: 1.2rem; border-radius: var(--radius-lg); background: white; box-shadow: var(--shadow-md); animation: demo-dialog-in 180ms ease-out; }
+.demo-confirm > span { display: grid; width: 2.5rem; height: 2.5rem; place-items: center; border-radius: 50%; background: rgba(204, 58, 99, 0.09); color: var(--color-rose-600); }
+.demo-confirm--success > span { background: rgba(162, 171, 115, 0.18); color: var(--color-olive-700); }
+.demo-confirm small { color: var(--color-rose-700); font-size: 0.52rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; }
+.demo-confirm h2 { margin-top: 0.16rem; font-family: var(--font-display); font-size: 1.3rem; }
+.demo-confirm p { margin-top: 0.3rem; color: var(--color-ink-700); font-size: 0.57rem; line-height: 1.5; }
+.demo-confirm > footer { display: flex; grid-column: 1 / -1; justify-content: flex-end; gap: 0.5rem; margin-top: 0.25rem; }
+.demo-confirm > footer button { min-height: 40px; padding: 0.5rem 0.8rem; border: 1px solid var(--color-border); border-radius: var(--radius-pill); background: white; color: var(--color-ink-700); cursor: pointer; font-size: 0.53rem; font-weight: 850; }
+.demo-confirm > footer button:last-child { border-color: var(--color-rose-600); background: var(--color-rose-600); color: white; }
+.demo-confirm--success > footer button:last-child { border-color: var(--color-olive-700); background: var(--color-olive-700); }
+
+.route-skeleton { position: fixed; inset: 0; z-index: 70; overflow: hidden; background: #fdf9f2; pointer-events: none; animation: route-skeleton-out 280ms ease forwards; }
+.route-skeleton__bar { height: 4px; background: linear-gradient(90deg, transparent, var(--color-rose-600), var(--color-olive-500), transparent); background-size: 200% 100%; animation: demo-shimmer 700ms linear infinite; }
+.route-skeleton__content { width: min(860px, calc(100% - 2rem)); margin: 13vh auto 0; }
+.route-skeleton__content > span { display: block; height: 1rem; margin-bottom: 1rem; border-radius: 0.4rem; background: var(--color-cream-100); }
+.route-skeleton__content > span:first-child { width: 28%; }
+.route-skeleton__content > span:nth-child(2) { width: 68%; height: 3.8rem; }
+.route-skeleton__content > div { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.route-skeleton__content i { height: 180px; border-radius: var(--radius-lg); background: linear-gradient(90deg, var(--color-cream-100), white, var(--color-cream-100)); background-size: 200% 100%; animation: demo-shimmer 1s linear infinite; }
+
+.demo-state-message { display: grid; min-height: 430px; place-items: center; align-content: center; padding: var(--space-7); border: 1px dashed rgba(41, 37, 31, 0.24); border-radius: var(--radius-lg); background: white; text-align: center; }
+.demo-state-message > span { display: grid; width: 4rem; height: 4rem; place-items: center; border-radius: 50%; background: var(--color-cream-100); color: var(--color-rose-600); }
+.demo-state-message > small { margin-top: var(--space-4); color: var(--color-rose-700); font-size: 0.58rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; }
+.demo-state-message h2 { max-width: 620px; margin-top: 0.25rem; font-family: var(--font-display); font-size: clamp(1.7rem, 4vw, 2.7rem); }
+.demo-state-message p { max-width: 520px; margin-top: 0.45rem; color: var(--color-ink-700); font-size: var(--text-xs); }
+.demo-state-message .button { margin-top: var(--space-5); }
+.demo-state-message--error { border-color: rgba(204, 58, 99, 0.35); background: rgba(204, 58, 99, 0.04); }
+
+.demo-error-page { display: grid; min-height: 100vh; place-items: center; align-content: center; padding: var(--page-gutter); background: var(--color-cream-50); text-align: center; }
+.demo-error-page > span { display: grid; width: 4.5rem; height: 4.5rem; place-items: center; border-radius: 50%; background: rgba(204, 58, 99, 0.1); color: var(--color-rose-600); }
+.demo-error-page .eyebrow { margin-top: var(--space-5); }
+.demo-error-page h1 { max-width: 700px; margin-top: var(--space-4); font-family: var(--font-display); font-size: clamp(2.4rem, 6vw, 4.5rem); line-height: 0.98; }
+.demo-error-page > p:last-of-type { max-width: 520px; margin-top: var(--space-4); color: var(--color-ink-700); }
+.demo-error-page > div { display: flex; gap: 0.6rem; margin-top: var(--space-5); }
+
+@keyframes demo-fade-in { from { opacity: 0; } }
+@keyframes demo-slide-in { from { transform: translateX(100%); } }
+@keyframes demo-toast-in { from { opacity: 0; transform: translateY(-10px) scale(0.98); } }
+@keyframes demo-dialog-in { from { opacity: 0; transform: translateY(8px) scale(0.98); } }
+@keyframes demo-shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+@keyframes route-skeleton-out { 0%, 62% { opacity: 1; } 100% { opacity: 0; } }
+
+@media (max-width: 900px) {
+  .demo-guide-trigger { bottom: 5.7rem; }
+  .toast-region { top: 0.7rem; }
+}
+
+@media (max-width: 520px) {
+  .demo-guide-trigger { bottom: 5.7rem; left: 0.75rem; }
+  .demo-guide-trigger span { display: none; }
+  .demo-guide-trigger small { min-width: 1.7rem; }
+  .route-skeleton__content > div { grid-template-columns: 1fr; }
+  .route-skeleton__content i:not(:first-child) { display: none; }
+  .demo-error-page > div { width: 100%; flex-direction: column; }
+}

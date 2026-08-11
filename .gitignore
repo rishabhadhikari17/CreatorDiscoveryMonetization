@@ -1,0 +1,19 @@
+node_modules/
+dist/
+.vite/
+.step*-verify/
+creator-platform/
+.env
+.env.*
+!.env.example
+*.local
+*.log
+.DS_Store
+Thumbs.db
+
+# Local product planning and reference artifacts
+steps.md
+implementation_plan.md
+vistaar-implementation-plan.md
+*prototype*.html
+*.docx

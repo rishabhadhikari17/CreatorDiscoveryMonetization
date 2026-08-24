@@ -7,9 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test:search": "node --test src/features/creator-discovery/creatorSearch.test.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.112.4",
     "lucide-react": "^1.30.0",
     "react": "19.2.6",
     "react-dom": "19.2.6",

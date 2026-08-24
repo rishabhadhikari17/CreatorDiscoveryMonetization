@@ -14,7 +14,7 @@ Steps 1–13 from `steps.md` are implemented:
 - Campaign execution, deliverable status, and payment tracking
 - Responsive navigation, reusable UI primitives, empty states, and demo polish
 
-This phase uses realistic mock data and browser storage. Authentication, backend services, live social-platform data, AI integrations, and real payments are intentionally deferred.
+Most screens use realistic mock data and browser storage. Creator discovery can now use the Supabase `search_creators` RPC; it keeps the local creator dataset as a visible fallback when Supabase is not configured or the user has no authenticated session. Live social-platform data, AI integrations, and real payments remain deferred.
 
 ## Main routes
 
@@ -49,6 +49,8 @@ src/
 npm install
 npm run dev
 ```
+
+To use live creator search, copy `.env.example` to `.env.local`, set the Supabase URL and publishable key, apply the migrations, and sign in with a Supabase user. Without that setup, `/brand/discover` remains fully usable with local demo data.
 
 ## Validate
 

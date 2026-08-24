@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import globalGalliLogo from "../../../assets/globalgalli-logo.png";
 import "./Wordmark.css";
 
 export function Wordmark({ inverted = false, to = "/" }) {
@@ -8,9 +9,7 @@ export function Wordmark({ inverted = false, to = "/" }) {
       to={to}
       aria-label="GlobalGalli home"
     >
-      <span className="brand-wordmark__mark" aria-hidden="true">G</span>
-      <span className="brand-wordmark__name">GlobalGalli</span>
-      <span className="brand-wordmark__note">creator network</span>
+      <img className="brand-wordmark__image" src={globalGalliLogo} alt="" />
     </Link>
   );
 }

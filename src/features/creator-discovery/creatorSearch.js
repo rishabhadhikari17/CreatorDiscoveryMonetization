@@ -1,85 +1,205 @@
-import { creators, filterOptions } from "./data/creators.js";
+import { creators } from "./data/creators.js";
+import {
+  availabilityOptions,
+  fallbackFitWeights,
+  fallbackReferenceData,
+} from "./data/searchReferenceFallback.js";
+
+export const emptySearchFilters = {
+  state: "",
+  niche: "",
+  budget_per_deliverable: "",
+  languages: [],
+  platforms: [],
+  audience_min: "",
+  audience_max: "",
+  availability: [],
+  limit: 20,
+  relax: true,
+};
 
 const normalize = (value) => value.toLowerCase().replaceAll("&", "and");
 
-const aliases = {
-  language: { Bhojpuri: ["bhojpuri"], Marathi: ["marathi"], Tamil: ["tamil"], Punjabi: ["punjabi"], Hindi: ["hindi"] },
-  state: { Bihar: ["bihar"], Maharashtra: ["maharashtra"], "Tamil Nadu": ["tamil nadu"], Punjab: ["punjab", "punjabi"] },
-  district: Object.fromEntries(filterOptions.district.map((value) => [value, [value.toLowerCase()]])),
-  niche: {
-    "Food & Culture": ["food", "recipe", "cooking", "culture"],
-    "Home & Living": ["home", "living", "decor", "household"],
-    Beauty: ["beauty", "skincare", "makeup"], Lifestyle: ["lifestyle"], Travel: ["travel", "tourism"],
-    Agriculture: ["agriculture", "farming", "kheti"], Fitness: ["fitness", "wellness", "workout"],
-  },
+const nicheAliases = {
+  "food-culture": ["food", "recipe", "cooking", "culture"],
+  "home-living": ["home", "living", "decor", "household"],
+  beauty: ["beauty", "skincare", "makeup"],
+  lifestyle: ["lifestyle"],
+  travel: ["travel", "tourism"],
+  agriculture: ["agriculture", "farming", "kheti"],
+  fitness: ["fitness", "wellness", "workout"],
 };
 
-export const emptyFilters = Object.fromEntries(Object.keys(filterOptions).map((key) => [key, ""]));
+const relatedNiches = {
+  "food-culture": ["home-living", "agriculture", "lifestyle"],
+  "home-living": ["food-culture", "lifestyle", "beauty"],
+  beauty: ["lifestyle", "home-living", "fitness"],
+  lifestyle: ["beauty", "travel", "fitness", "home-living", "food-culture"],
+  travel: ["lifestyle", "food-culture"],
+  agriculture: ["food-culture", "home-living"],
+  fitness: ["lifestyle", "beauty"],
+};
 
-export function parseCampaignQuery(value) {
+const languageStateDefaults = { bhojpuri: "bihar", marathi: "maharashtra", tamil: "tamil-nadu", punjabi: "punjab" };
+const availabilityByName = Object.fromEntries(availabilityOptions.map(({ slug, name }) => [name, slug]));
+const availabilityScores = { this_month: 100, two_weeks: 88, next_month: 68, limited: 48 };
+
+function findMention(query, options) {
+  return [...options]
+    .sort((a, b) => b.name.length - a.name.length)
+    .find(({ slug, name }) => query.includes(normalize(name)) || query.includes(slug));
+}
+
+export function parseCampaignQuery(value, referenceData = fallbackReferenceData) {
   const query = normalize(value);
   const parsed = {};
+  const state = findMention(query, referenceData.states);
+  const language = findMention(query, referenceData.languages);
+  const niche = Object.entries(nicheAliases).find(([, terms]) => terms.some((term) => query.includes(term)));
 
-  Object.entries(aliases).forEach(([key, choices]) => {
-    const match = Object.entries(choices).find(([, terms]) => terms.some((term) => query.includes(term)));
-    if (match) parsed[key] = match[0];
-  });
+  if (state) parsed.state = state.slug;
+  if (language) {
+    parsed.languages = [language.slug];
+    if (!state && languageStateDefaults[language.slug]) parsed.state = languageStateDefaults[language.slug];
+  }
+  if (niche) parsed.niche = niche[0];
 
-  if (/under\s*(?:₹|rs\.?|inr)?\s*20\s*k|budget.{0,8}20\s*k/.test(query)) parsed.budget = "Up to ₹20K";
-  else if (/under\s*(?:₹|rs\.?|inr)?\s*30\s*k|budget.{0,8}30\s*k/.test(query)) parsed.budget = "Up to ₹30K";
-  else if (/under\s*(?:₹|rs\.?|inr)?\s*40\s*k|budget.{0,8}40\s*k/.test(query)) parsed.budget = "Up to ₹40K";
-  else if (/40\s*k\s*\+|above\s*(?:₹|rs\.?|inr)?\s*40\s*k/.test(query)) parsed.budget = "₹40K+";
+  const budgetMatch = query.match(/(?:under|below|up to|max(?:imum)?|budget(?: of)?|₹|rs\.?|inr)\s*(?:₹|rs\.?|inr)?\s*(\d+(?:\.\d+)?)\s*k/);
+  if (budgetMatch) parsed.budget_per_deliverable = Math.round(Number(budgetMatch[1]) * 1000);
 
-  if (/under\s*50\s*k|less than\s*50\s*k/.test(query)) parsed.audience = "Under 50K";
-  else if (/50\s*k\s*(?:-|–|to)\s*100\s*k|between\s*50\s*k/.test(query)) parsed.audience = "50K–100K";
-  else if (/100\s*k\s*\+|above\s*100\s*k/.test(query)) parsed.audience = "100K+";
+  const audienceRange = query.match(/(\d+)\s*k\s*(?:-|–|to)\s*(\d+)\s*k/);
+  if (audienceRange) {
+    parsed.audience_min = Number(audienceRange[1]) * 1000;
+    parsed.audience_max = Number(audienceRange[2]) * 1000;
+  } else {
+    const audienceMinimum = query.match(/(?:above|over|at least)\s*(\d+)\s*k(?:\s*(?:followers|audience))?/);
+    const audienceMaximum = query.match(/(?:under|below|up to)\s*(\d+)\s*k\s*(?:followers|audience)/);
+    if (audienceMinimum) parsed.audience_min = Number(audienceMinimum[1]) * 1000;
+    if (audienceMaximum) parsed.audience_max = Number(audienceMaximum[1]) * 1000;
+  }
 
-  if (/90\s*\+|quality.{0,8}90/.test(query)) parsed.quality = "90+ quality";
-  else if (/85\s*\+|high quality|quality.{0,8}85/.test(query)) parsed.quality = "85+ quality";
-  else if (/80\s*\+|quality.{0,8}80/.test(query)) parsed.quality = "80+ quality";
   return parsed;
 }
 
-function fits(creator, key, value) {
-  if (!value) return true;
-  if (key === "language") return creator.languages.includes(value);
-  if (["state", "district", "niche"].includes(key)) return creator[key] === value;
-  if (key === "audience") {
-    if (value === "Under 50K") return creator.audience < 50000;
-    if (value === "50K–100K") return creator.audience >= 50000 && creator.audience <= 100000;
-    return creator.audience > 100000;
+export function validateSearchFilters(filters) {
+  if (!filters.state || !filters.niche || filters.budget_per_deliverable === "") {
+    return "Choose a state, niche, and maximum rate before searching.";
   }
-  if (key === "quality") return creator.quality >= Number(value.match(/\d+/)?.[0] ?? 0);
-  if (key === "budget") {
-    if (value === "₹40K+") return creator.rateMax > 40000;
-    return creator.rateMin <= Number(value.match(/\d+/)?.[0] ?? 0) * 1000;
+  const budget = Number(filters.budget_per_deliverable);
+  if (!Number.isInteger(budget) || budget <= 0) return "Maximum rate must be a positive whole number of rupees.";
+
+  const minimum = filters.audience_min === "" ? null : Number(filters.audience_min);
+  const maximum = filters.audience_max === "" ? null : Number(filters.audience_max);
+  if ([minimum, maximum].some((number) => number !== null && (!Number.isInteger(number) || number < 0))) {
+    return "Follower limits must be non-negative whole numbers.";
   }
-  return true;
+  if (minimum !== null && maximum !== null && minimum > maximum) {
+    return "Minimum followers cannot exceed maximum followers.";
+  }
+  return "";
 }
 
-function textScore(creator, query) {
-  if (!query.trim()) return 0;
-  const haystack = normalize([creator.name, creator.handle, ...creator.languages, creator.state, creator.district, creator.niche, creator.proof].join(" "));
-  const stopWords = ["creator", "creators", "campaign", "with", "under", "for", "the"];
-  return normalize(query).split(/\s+/).filter((word) => word.length > 2 && !stopWords.includes(word))
-    .reduce((score, word) => score + (haystack.includes(word) ? 4 : 0), 0);
+export function toSearchPayload(filters) {
+  const payload = {
+    state: filters.state,
+    niche: filters.niche,
+    budget_per_deliverable: Number(filters.budget_per_deliverable),
+    limit: Math.min(Math.max(Number(filters.limit) || 20, 1), 50),
+    relax: filters.relax !== false,
+  };
+  ["languages", "platforms", "availability"].forEach((key) => {
+    if (filters[key]?.length) payload[key] = filters[key];
+  });
+  ["audience_min", "audience_max"].forEach((key) => {
+    if (filters[key] !== "" && filters[key] !== null && filters[key] !== undefined) {
+      payload[key] = Number(filters[key]);
+    }
+  });
+  return payload;
 }
 
-export function getResults(filters, query, sort = "match") {
-  const active = Object.entries(filters).filter(([, value]) => value);
-  const isStructuredQuery = Object.keys(parseCampaignQuery(query)).length > 0;
+function slugForName(options, name) {
+  return options.find((option) => option.name === name)?.slug ?? normalize(name).replaceAll(" ", "-");
+}
 
-  return creators
-    .filter((creator) => active.every(([key, value]) => fits(creator, key, value)))
-    .filter((creator) => !query.trim() || isStructuredQuery || textScore(creator, query) > 0)
-    .map((creator) => {
-      const filterFit = active.length ? active.filter(([key, value]) => fits(creator, key, value)).length / active.length : 0.72;
-      const queryFit = Math.min(textScore(creator, query) / 16, 1);
-      const match = Math.min(99, Math.round(42 + filterFit * 32 + creator.quality * 0.16 + creator.localReach * 0.08 + queryFit * 6));
-      return { ...creator, match };
-    })
-    .sort((a, b) => sort === "quality" ? b.quality - a.quality : sort === "audience" ? b.audience - a.audience : b.match - a.match);
+const roundToFiveHundred = (value) => Math.round(value / 500) * 500;
+
+function fitScore(factors) {
+  return Math.round(fallbackFitWeights.reduce(
+    (score, { factor, weight }) => score + factors[factor] * weight / 100,
+    0,
+  ));
+}
+
+function makeFallbackRow(creator, filters) {
+  const stateSlug = slugForName(fallbackReferenceData.states, creator.state);
+  const nicheSlug = slugForName(fallbackReferenceData.niches, creator.niche);
+  const languageSlugs = creator.languages.map((name) => slugForName(fallbackReferenceData.languages, name));
+  const platformSlugs = creator.platforms.map((name) => slugForName(fallbackReferenceData.platforms, name));
+  const availability = availabilityByName[creator.availability];
+  const estimatedCost = roundToFiveHundred((creator.rateMin + creator.rateMax) / 2);
+  const factors = {
+    quality: creator.quality,
+    location: 100,
+    relevance: nicheSlug === filters.niche ? 100 : relatedNiches[filters.niche]?.includes(nicheSlug) ? 70 : 42,
+    availability: availabilityScores[availability],
+    budget: estimatedCost <= filters.budget_per_deliverable
+      ? 100
+      : Math.max(25, Math.round(filters.budget_per_deliverable / estimatedCost * 100)),
+  };
+  const strictMatch = stateSlug === filters.state
+    && (!filters.languages?.length || filters.languages.some((slug) => languageSlugs.includes(slug)))
+    && (!filters.platforms?.length || filters.platforms.some((slug) => platformSlugs.includes(slug)))
+    && (!filters.availability?.length || filters.availability.includes(availability))
+    && (filters.audience_min === undefined || creator.audience >= filters.audience_min)
+    && (filters.audience_max === undefined || creator.audience <= filters.audience_max)
+    && estimatedCost <= filters.budget_per_deliverable * 1.5;
+
+  return {
+    creator_id: creator.id,
+    slug: creator.id,
+    name: creator.name,
+    handle: creator.handle,
+    initials: creator.initials,
+    script: creator.script,
+    audience_size: creator.audience,
+    quality_score: creator.quality,
+    local_reach_pct: creator.localReach,
+    engagement_rate: creator.engagement,
+    rate_min: creator.rateMin,
+    rate_max: creator.rateMax,
+    availability,
+    proof: creator.proof,
+    bio: null,
+    primary_language: creator.language,
+    state: creator.state,
+    district: creator.district,
+    niche: creator.niche,
+    languages: creator.languages,
+    platforms: creator.platforms,
+    fit_score: fitScore(factors),
+    fit_factors: factors,
+    estimated_cost: estimatedCost,
+    strictMatch,
+  };
+}
+
+export function fallbackSearchCreators(filters) {
+  const stateName = fallbackReferenceData.states.find(({ slug }) => slug === filters.state)?.name;
+  const ranked = creators
+    .map((creator) => makeFallbackRow(creator, filters))
+    .filter((creator) => creator.state === stateName)
+    .sort((a, b) => b.fit_score - a.fit_score || b.quality_score - a.quality_score || a.name.localeCompare(b.name));
+  const strictRows = ranked.filter(({ strictMatch }) => strictMatch);
+  const relaxed = strictRows.length === 0 && filters.relax;
+  const selected = relaxed ? ranked.filter((creator) => creator.estimated_cost <= filters.budget_per_deliverable * 1.5) : strictRows;
+
+  return selected.slice(0, filters.limit).map((creator) => ({
+    ...Object.fromEntries(Object.entries(creator).filter(([key]) => key !== "strictMatch")),
+    relaxed,
+  }));
 }
 
 export const formatAudience = (value) => value >= 100000 ? `${(value / 100000).toFixed(1)}L` : `${Math.round(value / 1000)}K`;
 export const formatRate = (value) => `₹${Math.round(value / 1000)}K`;
+export const formatAvailability = (slug) => availabilityOptions.find((option) => option.slug === slug)?.name ?? slug;

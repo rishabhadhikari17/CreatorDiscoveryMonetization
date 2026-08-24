@@ -30,6 +30,9 @@ Demo logins after seeding: `brand@vaani.test` and `priya@vaani.test`, password
 | `20260814090500_pricing_fit.sql` | `fair_band()`, `suggested_counter()`, `campaign_fit()` |
 | `20260814090600_rls.sql` | Row level security across every table |
 | `20260814090700_views.sql` | Read models for the discovery grid and both dashboards |
+| `20260825090000_search_creators.sql` | Shared weighted score and filter-driven `search_creators()` RPC |
+
+Run `supabase/tests/search_creators.sql` after a reset to check that shortlist scores did not drift and to smoke-test ranked discovery output.
 
 ## Decisions worth knowing
 

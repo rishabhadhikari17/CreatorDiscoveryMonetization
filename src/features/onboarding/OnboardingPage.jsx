@@ -277,13 +277,6 @@ export function OnboardingPage() {
     navigate(role === "brand" ? "/brand" : "/creator");
   }
 
-  function previewGoogleAccess() {
-    notify({
-      title: "Google sign-in preview",
-      message: "OAuth is not connected in this frontend prototype. Use the email form to continue safely.",
-    });
-  }
-
   function finishOnboarding(event) {
     event.preventDefault();
     const platforms = role === "creator"
@@ -379,11 +372,6 @@ export function OnboardingPage() {
                   <h2>{isLogin ? `Enter the ${roleLabel.toLowerCase()} workspace.` : `Join as a ${roleLabel.toLowerCase()}.`}</h2>
                 </div>
               </div>
-
-              <button className="onboarding-google" type="button" onClick={previewGoogleAccess}>
-                <span aria-hidden="true">G</span> Continue with Google
-              </button>
-              <div className="onboarding-divider"><span>or continue with email</span></div>
 
               {!isLogin && <TextField id="onboarding-name" label={role === "creator" ? "Full name" : "Brand or company name"} placeholder={role === "creator" ? "Kavya Reddy" : "Rooted Foods"} value={form.displayName} onChange={(event) => updateField("displayName", event.target.value)} autoComplete="name" required />}
               <TextField id="onboarding-email" label="Email" placeholder="you@example.com" type="email" value={form.email} onChange={(event) => updateField("email", event.target.value)} autoComplete="email" required />

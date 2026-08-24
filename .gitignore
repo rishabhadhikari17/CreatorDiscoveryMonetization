@@ -3,6 +3,7 @@ dist/
 .vite/
 .step*-verify/
 creator-platform/
+OnboardingForms/
 .env
 .env.*
 !.env.example

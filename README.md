@@ -1,6 +1,6 @@
-# Creator Discovery & Monetization
+# GlobalGalli — Creator Discovery & Monetization
 
-A polished, frontend-first marketplace for regional creator discovery, campaign collaboration, and monetization. Vaani and Vistaar are working names for the same product.
+A polished, frontend-first marketplace for regional creator discovery, campaign collaboration, and monetization.
 
 ## Current implementation
 
@@ -19,12 +19,15 @@ This phase uses realistic mock data and browser storage. Authentication, backend
 ## Main routes
 
 - `/` — Landing page and role selection
+- `/onboarding` — Creator and Brand profile onboarding
 - `/brand` — Brand dashboard
 - `/brand/discover` — Creator discovery
 - `/brand/shortlist` — Shortlist and campaign brief
 - `/brand/campaigns` — Campaign execution
+- `/brand/interests` — Creator interest inbox for posted campaigns
 - `/brand/deals` — Deal room
 - `/creator` — Creator dashboard
+- `/creator/opportunities` — Open brand campaigns and interest sharing
 - `/creator/offers` — Creator offer workflow
 - `/creator/collaborations` — Deliverables and payment tracking
 - `/design-system` — Shared UI foundation

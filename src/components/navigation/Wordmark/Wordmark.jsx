@@ -6,11 +6,11 @@ export function Wordmark({ inverted = false, to = "/" }) {
     <Link
       className={`brand-wordmark${inverted ? " brand-wordmark--inverted" : ""}`}
       to={to}
-      aria-label="Vaani home"
+      aria-label="GlobalGalli home"
     >
-      <span className="brand-wordmark__mark" aria-hidden="true">V</span>
-      <span className="brand-wordmark__name">Vaani</span>
-      <span className="brand-wordmark__note">working name</span>
+      <span className="brand-wordmark__mark" aria-hidden="true">G</span>
+      <span className="brand-wordmark__name">GlobalGalli</span>
+      <span className="brand-wordmark__note">creator network</span>
     </Link>
   );
 }

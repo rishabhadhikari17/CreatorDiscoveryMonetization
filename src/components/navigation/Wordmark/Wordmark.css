@@ -10,20 +10,17 @@
   width: 2.35rem;
   height: 2.35rem;
   place-items: center;
-  border-radius: 50% 50% 50% 0.4rem;
+  border-radius: 0.7rem;
   background: var(--color-rose-600);
   color: var(--color-white);
-  font-family: var(--font-display);
   font-size: 1.25rem;
-  font-weight: 700;
-  transform: rotate(-5deg);
+  font-weight: 800;
 }
 
 .brand-wordmark__name {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: -0.035em;
+  font-size: 1.28rem;
+  font-weight: 750;
+  letter-spacing: -0.04em;
 }
 
 .brand-wordmark__note {

@@ -1,0 +1,753 @@
+/* Creator experience refresh
+   Keeps feature logic local while giving every creator route one legible,
+   photography-led marketplace language. */
+
+.creator-app {
+  background: #f8f7f4;
+}
+
+.creator-sidebar {
+  width: 264px;
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #242321;
+}
+
+.creator-sidebar__brand {
+  min-height: 76px;
+  padding-inline: 1.25rem;
+}
+
+.creator-sidebar__profile {
+  grid-template-columns: auto minmax(0, 1fr);
+  margin: 1rem;
+  padding: 0.75rem;
+  border-color: rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.creator-shell-avatar,
+.creator-topbar-avatar {
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--color-cream-100);
+}
+
+.creator-shell-avatar {
+  width: 3rem;
+  height: 3rem;
+}
+
+.creator-shell-avatar img,
+.creator-topbar-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.creator-shell-avatar span {
+  right: -0.05rem;
+  bottom: -0.05rem;
+  border-color: #242321;
+}
+
+.creator-sidebar__profile > div:last-child span,
+.creator-nav > p {
+  font-size: 0.65rem;
+  font-weight: 650;
+}
+
+.creator-sidebar__profile > div:last-child strong {
+  margin-top: 0.15rem;
+  font-size: 0.82rem;
+}
+
+.creator-sidebar__profile > div:last-child small {
+  margin-top: 0.1rem;
+  font-size: 0.65rem;
+}
+
+.creator-nav {
+  gap: 0.25rem;
+  padding-inline: 0.75rem;
+}
+
+.creator-nav__link {
+  min-height: 46px;
+  border-radius: var(--radius-sm);
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.creator-nav__link:hover {
+  background: rgba(255, 255, 255, 0.07);
+  transform: none;
+}
+
+.creator-nav__link.is-active {
+  background: var(--color-white);
+  color: var(--color-ink-900);
+  box-shadow: none;
+}
+
+.creator-sidebar__tip {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  background: transparent;
+}
+
+.creator-sidebar__tip strong { font-size: 0.75rem; }
+.creator-sidebar__tip span { color: rgba(255, 255, 255, 0.56); font-size: 0.68rem; }
+
+.creator-main {
+  padding-left: 264px;
+}
+
+.creator-topbar {
+  min-height: 76px;
+  background: rgba(255, 253, 249, 0.95);
+}
+
+.creator-topbar__title span {
+  font-size: 0.68rem;
+  font-weight: 650;
+}
+
+.creator-topbar__title h1 {
+  font-size: 1.1rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.creator-topbar-avatar {
+  width: 36px;
+  height: 36px;
+}
+
+.creator-profile-menu summary > span:nth-child(2) strong { font-size: 0.76rem; }
+.creator-profile-menu summary > span:nth-child(2) small { font-size: 0.64rem; }
+
+.creator-content {
+  width: min(100%, 1380px);
+  padding: clamp(2rem, 4vw, 3.5rem) var(--page-gutter) 8rem;
+}
+
+.creator-dashboard,
+.creator-app .opportunities-page,
+.creator-offers-page,
+.creator-app .campaign-execution-page,
+.creator-profile-editor {
+  gap: 1.5rem;
+}
+
+.creator-dashboard__welcome h2,
+.creator-app .opportunities-hero h2,
+.creator-offers-hero h2,
+.creator-app .campaign-execution-hero h2,
+.profile-editor-header h2 {
+  margin-top: 0.75rem;
+  font-size: clamp(2.55rem, 4.8vw, 4.25rem);
+  font-weight: 650;
+  letter-spacing: -0.06em;
+  line-height: 0.98;
+}
+
+.creator-app .opportunities-hero h2 em,
+.creator-offers-hero h2 em,
+.creator-app .campaign-execution-hero h2 em {
+  font-style: normal;
+}
+
+.creator-dashboard__welcome > div:first-child > p:last-child,
+.creator-app .opportunities-hero > div > p:last-child,
+.creator-offers-hero > div > p:last-child,
+.creator-app .campaign-execution-hero > div > p:last-child,
+.profile-editor-header > div:first-child > p:last-child {
+  max-width: 680px;
+  margin-top: 0.9rem;
+  color: var(--color-ink-500);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+/* Dashboard */
+
+.profile-completeness {
+  grid-template-columns: auto auto 1fr auto;
+  min-width: 340px;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.profile-completeness__photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-completeness__ring {
+  width: 46px;
+  height: 46px;
+}
+
+.profile-completeness__ring::before {
+  width: 35px;
+  height: 35px;
+}
+
+.profile-completeness > div:nth-child(3) span { font-size: 0.67rem; }
+.profile-completeness > div:nth-child(3) strong { font-size: 0.8rem; }
+.profile-completeness > div:nth-child(3) small { font-size: 0.65rem; }
+
+.creator-value-grid {
+  gap: 1rem;
+}
+
+.creator-value-card {
+  min-height: 350px;
+  padding: 1.35rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+}
+
+.quality-value-card {
+  border-color: transparent;
+  background: var(--color-ink-900);
+}
+
+.rate-value-card {
+  border-top: 4px solid var(--color-rose-600);
+  background: var(--color-white);
+}
+
+.value-card__eyebrow,
+.creator-panel-heading > div > span {
+  font-size: 0.67rem;
+  font-weight: 700;
+}
+
+.rate-value-card .value-card__eyebrow { color: var(--color-rose-700); }
+.creator-value-card > a { font-size: 0.7rem; font-weight: 650; }
+.creator-quality-hero h3 { font-size: 1.35rem; font-weight: 650; }
+.creator-quality-hero p { font-size: 0.68rem; }
+.creator-score-mini > div > span { font-size: 0.62rem; }
+.creator-score-mini strong { font-size: 0.62rem; }
+
+.rate-value-card > span,
+.audience-community span { font-size: 0.68rem; }
+.rate-value-card > h3 { font-size: 2.15rem; }
+.rate-value-card > p { font-size: 0.7rem; }
+.rate-value-card li { font-size: 0.66rem; }
+
+.audience-insight-list strong { font-size: 0.7rem; }
+.audience-insight-list span { font-size: 0.64rem; line-height: 1.45; }
+.audience-language span,
+.audience-language small { font-size: 0.62rem; }
+.audience-language strong { font-size: 0.76rem; }
+
+.creator-dashboard-layout,
+.creator-dashboard-bottom {
+  gap: 1rem;
+}
+
+.creator-dashboard-panel {
+  border-radius: var(--radius-md);
+}
+
+.creator-panel-heading h3 {
+  font-size: 1.35rem;
+  font-weight: 650;
+}
+
+.creator-panel-heading > a { font-size: 0.68rem; font-weight: 650; }
+.creator-offer-list h4,
+.active-collaboration h4 { font-size: 0.78rem; }
+.creator-offer-list p,
+.active-collaboration header p { font-size: 0.68rem; }
+.creator-offer-list article > div:nth-child(2) > span,
+.active-collaboration header > div:nth-child(2) > span { font-size: 0.62rem; }
+.creator-offer-list article > div:nth-child(2) > small { font-size: 0.6rem; }
+.creator-offer-value span,
+.creator-offer-value small { font-size: 0.58rem; }
+.creator-offer-value strong { font-size: 0.75rem; }
+
+.active-collaboration {
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  background: var(--color-cream-50);
+}
+
+.active-collaboration dt,
+.collab-next-step span { font-size: 0.62rem; }
+.active-collaboration dd,
+.collab-next-step strong,
+.collab-next-step a { font-size: 0.68rem; }
+
+.earnings-summary span,
+.earnings-summary small { font-size: 0.58rem; }
+.earnings-summary strong { font-size: 0.76rem; }
+.improvement-intro p,
+.improvement-list article p { font-size: 0.68rem; }
+.improvement-list article strong { font-size: 0.74rem; }
+
+/* Opportunities */
+
+.creator-app .opportunities-hero {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.creator-app .opportunities-hero dl,
+.creator-offers-hero > dl,
+.creator-app .campaign-execution-hero > dl {
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.creator-app .opportunities-hero dt,
+.creator-offers-hero dt,
+.creator-app .campaign-execution-hero dt {
+  font-size: 0.68rem;
+}
+
+.creator-app .opportunities-hero dd,
+.creator-offers-hero dd,
+.creator-app .campaign-execution-hero dd {
+  font-size: 1.5rem;
+}
+
+.creator-app .opportunity-toolbar {
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.creator-app .opportunity-view-tabs button,
+.creator-app .opportunity-search input,
+.creator-app .opportunity-category select {
+  font-size: 0.78rem;
+}
+
+.creator-app .opportunity-results-heading span { font-size: 0.68rem; font-weight: 700; }
+.creator-app .opportunity-results-heading h3 { font-size: 1.45rem; font-weight: 650; }
+.creator-app .opportunity-results-heading > p { font-size: 0.72rem; }
+
+.creator-app .opportunity-card {
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.creator-app .opportunity-card--featured {
+  border-color: var(--color-olive-500);
+  box-shadow: none;
+}
+
+.creator-app .opportunity-card__ribbon {
+  background: rgba(154, 166, 122, 0.2);
+  color: var(--color-olive-700);
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.creator-app .opportunity-brand-mark {
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+}
+
+.creator-app .opportunity-card:nth-child(n) .opportunity-brand-mark {
+  background: var(--color-ink-900);
+  color: var(--color-white);
+}
+
+.creator-app .opportunity-card__brand > div:nth-child(2) span,
+.creator-app .opportunity-card__brand > div:nth-child(2) small { font-size: 0.65rem; }
+.creator-app .opportunity-card__brand > div:nth-child(2) strong { font-size: 0.78rem; }
+.creator-app .opportunity-match strong { font-size: 0.8rem; }
+.creator-app .opportunity-match span { font-size: 0.55rem; }
+.creator-app .opportunity-card__body h3 { font-size: 1.35rem; font-weight: 650; }
+.creator-app .opportunity-card__body > p { font-size: 0.78rem; }
+.creator-app .opportunity-tags span { font-size: 0.64rem; font-weight: 600; }
+.creator-app .opportunity-facts dt { font-size: 0.62rem; }
+.creator-app .opportunity-facts dd { font-size: 0.7rem; }
+.creator-app .opportunity-card__footer { background: var(--color-cream-50); }
+.creator-app .opportunity-card__footer > span { font-size: 0.64rem; }
+.creator-app .opportunity-card__footer .button { font-size: 0.72rem; }
+.creator-app .interest-composer textarea { font-size: 0.76rem; }
+.creator-app .interest-composer footer small { font-size: 0.6rem; }
+
+/* Offers */
+
+.creator-offers-layout {
+  grid-template-columns: 250px minmax(0, 1fr) 300px;
+}
+
+.offer-inbox,
+.creator-fair-rate,
+.offer-detail-panel {
+  border-radius: var(--radius-md);
+}
+
+.offer-inbox > header span,
+.offer-detail-panel > header > span,
+.offer-response-form > header span,
+.offer-decline-confirm > div > span,
+.creator-fair-rate__eyebrow {
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.offer-inbox > header h3 { font-size: 1.05rem; font-weight: 650; }
+.offer-inbox > header small { font-size: 0.6rem; }
+.offer-inbox__copy > small { font-size: 0.56rem; }
+.offer-inbox__copy > strong { font-size: 0.74rem; }
+.offer-inbox__copy > span { font-size: 0.64rem; }
+.offer-inbox__copy > em { font-size: 0.58rem; }
+.offer-inbox__amount strong { font-size: 0.7rem; }
+.offer-inbox__amount small { font-size: 0.56rem; }
+.offer-inbox__tip p { font-size: 0.61rem; }
+
+.offer-brand-card {
+  border-radius: var(--radius-md);
+}
+
+.offer-brand-card__mark { border-radius: var(--radius-sm); }
+.offer-brand-card > div:nth-child(2) > span { font-size: 0.6rem; }
+.offer-brand-card h3 { font-size: 1.25rem; font-weight: 650; }
+.offer-brand-card > div:nth-child(2) > p { font-size: 0.65rem; }
+.offer-deadline span { font-size: 0.58rem; }
+.offer-deadline strong { font-size: 0.66rem; }
+
+.offer-detail-panel > header > small { font-size: 0.62rem; }
+.campaign-overview > h3 { font-size: 1.55rem; font-weight: 650; }
+.campaign-overview > p { font-size: 0.76rem; }
+.campaign-overview dt,
+.offer-rights-list dt { font-size: 0.62rem; }
+.campaign-overview dd,
+.offer-rights-list dd { font-size: 0.69rem; }
+.campaign-overview blockquote { font-family: var(--font-body); font-size: 0.76rem; }
+.offer-terms-grid h4 { font-size: 0.7rem; }
+.offer-terms-grid article strong { font-size: 0.69rem; }
+.offer-terms-grid article small { font-size: 0.62rem; }
+.offer-action-bar > div:first-child span { font-size: 0.6rem; }
+.offer-action-bar > div:first-child strong { font-size: 0.76rem; }
+.offer-decline-button { font-size: 0.68rem; }
+.suggestion-callout span { font-size: 0.58rem; }
+.suggestion-callout strong { font-size: 0.76rem; }
+.suggestion-callout p { font-size: 0.62rem; }
+.counter-form-grid label > span { font-size: 0.66rem; }
+.counter-form-grid textarea,
+.offer-decline-confirm textarea { font-size: 0.74rem; }
+.offer-response-form > footer > small { font-size: 0.6rem; }
+.offer-response-banner strong { font-size: 0.7rem; }
+.offer-response-banner p { font-size: 0.62rem; }
+.offer-response-banner button,
+.offer-response-banner > a { font-size: 0.64rem; }
+.negotiation-history li strong { font-size: 0.7rem; }
+.negotiation-history li p { font-size: 0.64rem; }
+.negotiation-history li small { font-size: 0.58rem; }
+.creator-fair-rate > span { font-size: 0.62rem; }
+.creator-fair-rate > h3 { font-size: 1.55rem; font-weight: 650; }
+.creator-fair-rate > p { font-size: 0.66rem; }
+.creator-rate-status strong { font-size: 0.68rem; }
+.creator-rate-status span { font-size: 0.6rem; }
+.creator-rate-evidence h4 { font-size: 0.7rem; }
+.creator-rate-evidence p { font-size: 0.62rem; }
+.counter-rule-card > div:first-child span,
+.counter-rule-card > p,
+.counter-rule-card dl > div,
+.creator-rate-note { font-size: 0.6rem; }
+.counter-rule-card > div:first-child strong { font-size: 0.8rem; }
+.counter-rule-card > button { font-size: 0.66rem; }
+
+/* Collaboration execution */
+
+.creator-app .campaign-list-card,
+.creator-app .campaign-side-card,
+.creator-app .campaign-panel,
+.creator-app .campaign-progress,
+.creator-app .campaign-state-card {
+  border-radius: var(--radius-md);
+}
+
+.creator-app .campaign-title-card {
+  border-radius: var(--radius-md);
+}
+
+.creator-app .campaign-list-card > header span,
+.creator-app .campaign-panel > header span,
+.creator-app .campaign-state-card > div > span,
+.creator-app .campaign-side-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.creator-app .campaign-list-card > header h3,
+.creator-app .campaign-title-card h3,
+.creator-app .campaign-panel > header h3,
+.creator-app .campaign-state-card h3 {
+  font-weight: 650;
+}
+
+.creator-app .campaign-list-card > div > button > span:nth-child(2) small { font-size: 0.56rem; }
+.creator-app .campaign-list-card > div > button > span:nth-child(2) strong { font-size: 0.7rem; }
+.creator-app .campaign-list-card > div > button > span:nth-child(2) em { font-size: 0.62rem; }
+.creator-app .campaign-title-card > div:nth-child(2) > span { font-size: 0.6rem; }
+.creator-app .campaign-title-card p { font-size: 0.64rem; }
+.creator-app .campaign-status-badge { font-size: 0.62rem; }
+.creator-app .campaign-progress li strong { font-size: 0.61rem; }
+.creator-app .campaign-panel > p,
+.creator-app .campaign-state-card p,
+.creator-app .campaign-activity-panel li p { font-size: 0.68rem; }
+.creator-app .campaign-activity-panel li strong { font-size: 0.72rem; }
+.creator-app .campaign-activity-panel li small { font-size: 0.58rem; }
+.creator-app .payment-tracker > span,
+.creator-app .payment-state span,
+.creator-app .payment-tracker dt,
+.creator-app .payment-tracker > p { font-size: 0.6rem; }
+.creator-app .payment-state strong,
+.creator-app .payment-tracker dd { font-size: 0.7rem; }
+.creator-app .creator-feedback-card blockquote { font-family: var(--font-body); font-size: 0.68rem; }
+
+/* Profile editor */
+
+.profile-strength-banner,
+.profile-editor-panel,
+.profile-preview-card {
+  border-radius: var(--radius-md);
+}
+
+.profile-strength-banner h3 { font-size: 1.35rem; font-weight: 650; }
+.profile-strength-banner > div:nth-child(2) > span { font-size: 0.66rem; font-weight: 700; }
+.profile-strength-banner > div:nth-child(2) > p { font-size: 0.72rem; }
+.profile-strength-actions div { font-size: 0.67rem; }
+
+.profile-editor-nav {
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.profile-editor-nav a {
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+.profile-editor-panel__heading > div > span { font-size: 0.67rem; font-weight: 700; }
+.profile-editor-panel__heading h3 { font-size: 1.55rem; font-weight: 650; }
+.profile-editor-panel__heading p { font-size: 0.75rem; line-height: 1.5; }
+.profile-section-status { font-size: 0.66rem; }
+
+.profile-photo-control > div,
+.profile-preview-identity > div {
+  overflow: visible;
+  border-radius: 50%;
+}
+
+.profile-photo-control > div > img,
+.profile-preview-identity > div > img {
+  object-position: center 28%;
+}
+
+.creator-profile-field,
+.secondary-niches-field > div:first-child > span { font-size: 0.72rem; }
+.creator-profile-field input,
+.creator-profile-field select,
+.creator-profile-field textarea,
+.secondary-niche-input input {
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  font-size: 0.8rem;
+}
+.creator-profile-field small,
+.secondary-niches-field > div:first-child > small,
+.profile-photo-control small { font-size: 0.62rem; }
+.secondary-niche-input button { border-radius: var(--radius-sm); font-size: 0.7rem; font-weight: 650; }
+.secondary-niche-chips > span { font-size: 0.66rem; font-weight: 600; }
+
+.profile-platform,
+.profile-portfolio-card,
+.profile-insight-grid article {
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+}
+
+.profile-platform__identity h4 { font-size: 0.8rem; }
+.profile-platform__identity span,
+.profile-platform__identity p,
+.profile-platform__action small { font-size: 0.64rem; }
+.profile-platform__audience strong { font-size: 1rem; }
+.profile-platform__audience span { font-size: 0.6rem; }
+.profile-platform__action button { font-size: 0.64rem; font-weight: 650; }
+.profile-data-note span { font-size: 0.68rem; }
+.portfolio-proof-copy span { font-size: 0.62rem; }
+.portfolio-proof-copy h4 { font-size: 0.78rem; }
+.portfolio-proof-copy p { font-size: 0.68rem; }
+.portfolio-proof-actions button { font-size: 0.64rem; font-weight: 650; }
+.profile-insight-grid article > span { font-size: 0.62rem; }
+.profile-insight-grid article > strong { font-size: 1.4rem; }
+.profile-insight-grid article > small { font-size: 0.6rem; }
+.profile-rate-editor > div:first-child strong { font-size: 0.78rem; }
+.profile-rate-editor > div:first-child small,
+.profile-rate-editor > p { font-size: 0.65rem; }
+.profile-preview-identity h3 { font-size: 1.2rem; font-weight: 650; }
+.profile-preview-identity p { font-size: 0.66rem; }
+.profile-visibility-card strong,
+.profile-unsaved-card strong { font-size: 0.72rem; }
+.profile-visibility-card small,
+.profile-unsaved-card p { font-size: 0.62rem; }
+
+/* Brand-facing creator profile */
+
+.creator-profile-hero {
+  border-radius: var(--radius-md);
+}
+
+.profile-avatar {
+  width: 7.25rem;
+  height: 7.25rem;
+  overflow: visible;
+  border-radius: 50%;
+}
+
+.profile-avatar > img {
+  object-position: center 28%;
+}
+
+.creator-profile-hero__identity > div:last-child > p { font-size: 0.68rem; font-weight: 700; }
+.creator-profile-hero__identity h2 { font-size: clamp(2.1rem, 4vw, 3.45rem); font-weight: 650; }
+.creator-profile-hero__identity > div:last-child > span { font-size: 0.75rem; }
+.public-profile-niches span { font-size: 0.62rem; }
+.profile-meta > span { font-size: 0.7rem; }
+.profile-section-nav { border-radius: var(--radius-md); }
+.profile-section-nav a { border-radius: var(--radius-sm); font-size: 0.72rem; font-weight: 650; }
+.profile-panel,
+.profile-commercial-card { border-radius: var(--radius-md); }
+.profile-section-heading > div > span,
+.quality-intelligence__header > div:last-child > span,
+.collaboration-history .profile-section-heading > div > span { font-size: 0.68rem; font-weight: 700; }
+.profile-section-heading h3,
+.quality-intelligence__header h3 { font-size: 1.6rem; font-weight: 650; }
+.profile-key-metrics dt { font-size: 0.66rem; }
+.profile-key-metrics dd { font-size: 1.75rem; }
+.profile-key-metrics span { font-size: 0.64rem; }
+.audience-breakdown,
+.score-component { background: var(--color-cream-50); }
+.audience-breakdown h4 { font-size: 0.82rem; }
+.audience-breakdown header p,
+.breakdown-bar > div:first-child span,
+.gender-visual li { font-size: 0.66rem; }
+.breakdown-bar > div:first-child strong { font-size: 0.7rem; }
+.score-component__track span { background: var(--color-rose-600); }
+.score-component h4 { font-size: 0.78rem; }
+.score-component__top > div:nth-child(2) > span,
+.score-component > p,
+.component-evidence span,
+.score-method-note span { font-size: 0.66rem; }
+.collaboration-table h4 { font-size: 0.76rem; }
+.collaboration-table article > div:nth-child(2) > span,
+.collaboration-table article > div:nth-child(2) > small,
+.collaboration-table article > div:nth-child(3) span,
+.collaboration-status { font-size: 0.64rem; }
+.collaboration-table article > div:nth-child(3) strong { font-size: 0.72rem; }
+.profile-commercial-card { background: var(--color-white); border: 1px solid var(--color-border); }
+.commercial-card__eyebrow { color: var(--color-rose-700); font-size: 0.66rem; font-weight: 700; }
+.profile-commercial-card > span,
+.profile-commercial-card > p { font-size: 0.68rem; }
+.rate-reasons strong { font-size: 0.7rem; }
+.rate-reasons span,
+.commercial-benchmark strong,
+.commercial-benchmark span,
+.profile-commercial-card > small { font-size: 0.64rem; }
+
+@media (max-width: 1180px) {
+  .creator-offers-layout {
+    grid-template-columns: 230px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .creator-main { padding-left: 0; }
+  .creator-content { padding-bottom: 9rem; }
+  .creator-mobile-nav .creator-nav__link.is-active {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+  }
+  .profile-completeness { min-width: 0; }
+}
+
+@media (max-width: 760px) {
+  .creator-dashboard__welcome,
+  .profile-editor-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .profile-completeness {
+    width: 100%;
+  }
+
+  .creator-value-grid,
+  .creator-dashboard-layout,
+  .creator-dashboard-bottom,
+  .role-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .creator-value-card {
+    min-height: 320px;
+  }
+
+  .creator-app .opportunities-hero dl,
+  .creator-offers-hero > dl,
+  .creator-app .campaign-execution-hero > dl {
+    min-width: 0;
+  }
+
+  .profile-strength-banner {
+    grid-template-columns: auto 1fr;
+  }
+
+  .profile-strength-actions {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .creator-dashboard__welcome h2,
+  .creator-app .opportunities-hero h2,
+  .creator-offers-hero h2,
+  .creator-app .campaign-execution-hero h2,
+  .profile-editor-header h2 {
+    font-size: 2.65rem;
+  }
+
+  .profile-completeness {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .profile-completeness__photo {
+    display: none;
+  }
+
+  .creator-app .opportunities-hero dl,
+  .creator-offers-hero > dl,
+  .creator-app .campaign-execution-hero > dl {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .creator-profile-hero {
+    align-items: stretch;
+  }
+
+  .creator-profile-hero__identity {
+    align-items: flex-start;
+  }
+
+  .profile-avatar {
+    width: 5.25rem;
+    height: 5.25rem;
+  }
+}

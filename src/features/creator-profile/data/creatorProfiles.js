@@ -1,4 +1,5 @@
 import { creators } from "../../creator-discovery/data/creators.js";
+import { readCreatorProfileEdits } from "../creatorProfileStorage.js";
 
 const regionalMix = {
   Bihar: [["Muzaffarpur", 31], ["Patna", 24], ["Darbhanga", 18], ["Gaya", 11], ["Other Bihar", 16]],
@@ -68,13 +69,15 @@ export function getCreatorProfile(id) {
   const creator = creators.find((item) => item.id === id);
   if (!creator) return null;
 
+  const edits = readCreatorProfileEdits(id);
+
   const regional = regionalMix[creator.state] ?? [[creator.district, creator.localReach], [`Other ${creator.state}`, 100 - creator.localReach]];
   const history = collaborations[id] ?? [
     { brand: "Rooted Foods", campaign: `${creator.state} Community Stories`, date: "April 2026", result: `${creator.engagement}% engagement`, status: "Completed" },
     { brand: "Local Origins", campaign: "Made Close to Home", date: "December 2025", result: `${creator.localReach}% local reach`, status: "Completed" },
   ];
 
-  return {
+  const profile = {
     ...creator,
     bio: `${creator.name} creates practical ${creator.niche.toLowerCase()} stories rooted in ${creator.district}. Their community returns for useful, culturally familiar recommendations delivered primarily in ${creator.language}.`,
     regionalAudience: regional,
@@ -89,5 +92,39 @@ export function getCreatorProfile(id) {
     percentile: Math.min(98, Math.round(creator.quality + 7)),
     lastAnalysed: "8 August 2026",
     collaborations: history,
+    profileVisible: true,
+    acceptingOffers: true,
+    secondaryNiches: [],
+  };
+
+  if (!edits) return profile;
+
+  const connectedPlatforms = edits.connectedPlatforms
+    ?.filter((platform) => platform.connected)
+    .map((platform) => platform.name);
+  const languages = edits.language
+    ? [edits.language, ...profile.languages.filter((language) => language !== edits.language)]
+    : profile.languages;
+
+  return {
+    ...profile,
+    name: edits.name || profile.name,
+    initials: edits.name ? edits.name.split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase() : profile.initials,
+    avatarDataUrl: edits.avatarDataUrl || null,
+    handle: edits.handle || profile.handle,
+    bio: edits.bio || profile.bio,
+    district: edits.district || profile.district,
+    state: edits.state || profile.state,
+    language: edits.language || profile.language,
+    languages,
+    niche: edits.niche || profile.niche,
+    secondaryNiches: edits.secondaryNiches ?? profile.secondaryNiches,
+    availability: edits.availability || profile.availability,
+    rateMin: Number(edits.rateMin) || profile.rateMin,
+    rateMax: Number(edits.rateMax) || profile.rateMax,
+    platforms: connectedPlatforms ?? profile.platforms,
+    collaborations: edits.portfolio ? [...edits.portfolio].sort((a, b) => Number(b.featured) - Number(a.featured)) : profile.collaborations,
+    profileVisible: edits.profileVisible ?? true,
+    acceptingOffers: edits.acceptingOffers ?? true,
   };
 }

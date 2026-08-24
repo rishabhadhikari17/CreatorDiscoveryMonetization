@@ -95,11 +95,11 @@
 .parsed-query-note svg { color: var(--color-rose-600); }
 
 .discovery-results-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); margin-top: var(--space-4); }
-.discovery-creator-card { position: relative; min-width: 0; padding: 1.1rem; overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-white); transition: box-shadow 180ms ease, transform 180ms ease; }
-.discovery-creator-card:hover { box-shadow: var(--shadow-sm); transform: translateY(-2px); }
-.discovery-creator-card__accent { position: absolute; inset: 0 0 auto; height: 4px; background: linear-gradient(90deg, var(--color-rose-600), var(--color-olive-500)); }
+.discovery-creator-card { position: relative; min-width: 0; padding: 1.1rem; overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-white); transition: border-color 180ms ease, box-shadow 180ms ease; }
+.discovery-creator-card:hover { border-color: var(--color-ink-500); box-shadow: var(--shadow-sm); }
+.discovery-creator-card__photo { width: calc(100% + 2.2rem); max-width: none; height: 190px; margin: -1.1rem -1.1rem 1rem; object-fit: cover; object-position: center 42%; }
 .discovery-creator-card__header { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.7rem; align-items: start; }
-.discovery-creator-card__avatar { position: relative; display: grid; width: 3.25rem; height: 3.25rem; place-items: center; border-radius: 50% 50% 50% 0.8rem; background: var(--color-olive-500); }
+.discovery-creator-card__avatar { position: relative; display: grid; width: 3.25rem; height: 3.25rem; place-items: center; border-radius: 50%; background: var(--color-olive-500); }
 .discovery-creator-card:nth-child(2n) .discovery-creator-card__avatar { background: var(--color-cream-100); }
 .discovery-creator-card__avatar strong { font-size: 0.72rem; }
 .discovery-creator-card__avatar span { position: absolute; right: -0.25rem; bottom: -0.25rem; display: grid; width: 1.35rem; height: 1.35rem; place-items: center; border: 2px solid white; border-radius: 50%; background: var(--color-rose-600); color: white; font-size: 0.6rem; font-weight: 850; }
@@ -108,7 +108,7 @@
 .discovery-creator-card__identity h3 { display: flex; gap: 0.3rem; align-items: center; margin-top: 0.15rem; overflow: hidden; font-family: var(--font-display); font-size: 1.1rem; letter-spacing: -0.025em; text-overflow: ellipsis; white-space: nowrap; }
 .discovery-creator-card__identity h3 svg { flex: 0 0 auto; color: var(--color-rose-600); }
 .discovery-creator-card__identity p { margin-top: 0.1rem; color: var(--color-ink-500); font-size: 0.62rem; }
-.match-stamp { display: grid; min-width: 3.25rem; min-height: 3.25rem; place-items: center; align-content: center; border-radius: 0.85rem; background: var(--color-ink-900); color: var(--color-cream-50); }
+.match-stamp { display: grid; min-width: 3.25rem; min-height: 3.25rem; place-items: center; align-content: center; border-radius: var(--radius-sm); background: var(--color-ink-900); color: var(--color-cream-50); }
 .match-stamp strong { font-family: var(--font-display); font-size: 1.03rem; line-height: 1; }
 .match-stamp span { margin-top: 0.12rem; color: rgba(255, 247, 235, 0.65); font-size: 0.48rem; font-weight: 800; text-transform: uppercase; }
 

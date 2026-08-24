@@ -1,30 +1,39 @@
 :root {
-  /* Brand palette */
-  --color-cream-50: #fff7eb;
-  --color-cream-100: #f9f0e0;
-  --color-olive-500: #a2ab73;
-  --color-rose-600: #cc3a63;
+  /* Brand palette: a quiet marketplace canvas with one high-energy accent */
+  --color-cream-50: #fffdf9;
+  --color-cream-100: #f6f4ef;
+  --color-olive-500: #9aa67a;
+  --color-rose-600: #d6385f;
 
   /* Accessible supporting neutrals derived from the brand palette */
-  --color-ink-900: #29251f;
-  --color-ink-700: #514a40;
-  --color-ink-500: #746c61;
+  --color-ink-900: #242321;
+  --color-ink-700: #4b4945;
+  --color-ink-500: #706d67;
   --color-white: #ffffff;
-  --color-border: rgba(41, 37, 31, 0.14);
-  --color-olive-700: #59613a;
-  --color-rose-700: #a9274c;
+  --color-border: #dedbd4;
+  --color-border-soft: #ece9e3;
+  --color-olive-700: #56613e;
+  --color-rose-700: #b82148;
+
+  /* Semantic states are never communicated by color alone. */
+  --color-success-700: #46603b;
+  --color-warning-700: #815516;
+  --color-error-700: #a52b32;
+  --color-focus: #6f42c1;
+  --color-disabled-bg: #eeeae4;
+  --color-disabled-text: #817d76;
 
   /* Typography */
-  --font-display: Georgia, "Times New Roman", serif;
-  --font-body: Inter, "Segoe UI", Arial, sans-serif;
+  --font-display: Inter, Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body: Inter, Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-md: 1rem;
   --text-lg: 1.125rem;
-  --text-xl: clamp(1.7rem, 3vw, 2.4rem);
-  --text-display: clamp(3rem, 8vw, 7.25rem);
+  --text-xl: clamp(1.7rem, 3vw, 2.35rem);
+  --text-display: clamp(3rem, 7vw, 6rem);
 
   /* Spacing */
   --space-1: 0.25rem;
@@ -38,14 +47,20 @@
   --space-9: 7rem;
 
   /* Shape and elevation */
-  --radius-sm: 0.65rem;
-  --radius-md: 1rem;
-  --radius-lg: 1.5rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
   --radius-pill: 999px;
-  --shadow-sm: 0 10px 30px rgba(41, 37, 31, 0.08);
-  --shadow-md: 0 24px 70px rgba(41, 37, 31, 0.12);
+  --shadow-sm: 0 2px 6px rgba(36, 35, 33, 0.04), 0 4px 12px rgba(36, 35, 33, 0.08);
+  --shadow-md: 0 4px 8px rgba(36, 35, 33, 0.06), 0 10px 24px rgba(36, 35, 33, 0.1);
+
+  /* Shared interaction rules */
+  --control-height: 3rem;
+  --touch-target: 2.75rem;
+  --motion-fast: 160ms;
+  --motion-standard: 180ms;
 
   /* Layout */
-  --page-max: 1180px;
+  --page-max: 1280px;
   --page-gutter: clamp(1rem, 4vw, 2.5rem);
 }

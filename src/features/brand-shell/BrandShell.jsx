@@ -1,6 +1,7 @@
 import { Bell, ChevronDown, CircleHelp, Sparkles } from "lucide-react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { Wordmark } from "../../components/navigation/Wordmark/Wordmark";
+import { ProfileExitButton } from "../../components/navigation/ProfileExitButton/ProfileExitButton";
 import { useDealState } from "../deal-state/DealStateContext.js";
 import { brandNavigation } from "./brandNavigation";
 import "./BrandShell.css";
@@ -15,9 +16,10 @@ function NavigationLink({ item, mobile = false }) {
       className={({ isActive }) => `brand-nav__link${isActive || relatedActive ? " is-active" : ""}`}
       to={item.path}
       end={item.end}
+      aria-current={relatedActive ? "page" : undefined}
     >
       <span className="brand-nav__icon"><Icon size={mobile ? 20 : 18} strokeWidth={2} /></span>
-      <span>{item.label}</span>
+      <span>{mobile && item.mobileLabel ? item.mobileLabel : item.label}</span>
       {item.badge && <small>{item.badge}</small>}
     </NavLink>
   );
@@ -25,11 +27,13 @@ function NavigationLink({ item, mobile = false }) {
 
 export function BrandShell() {
   const { pathname } = useLocation();
-  const { deals, campaigns } = useDealState();
+  const { deals, campaigns, opportunities, interests } = useDealState();
   const primaryDeal = deals.find((deal) => deal.id === "rooted-foods-bihar");
   const activeDealCount = deals.filter((deal) => deal.brand.name === "Rooted Foods" && !["draft", "withdrawn", "declined"].includes(deal.dealStatus)).length;
   const activeCampaignCount = campaigns.filter((campaign) => campaign.brand.name === "Rooted Foods" && campaign.status !== "completed").length;
-  const navigation = brandNavigation.map((item) => item.path === "/brand/deals" ? { ...item, badge: activeDealCount ? String(activeDealCount) : null } : item.path === "/brand/campaigns" ? { ...item, badge: activeCampaignCount ? String(activeCampaignCount) : null } : item);
+  const rootedOpportunityIds = new Set(opportunities.filter((opportunity) => opportunity.brand.name === "Rooted Foods").map((opportunity) => opportunity.id));
+  const interestCount = interests.filter((interest) => rootedOpportunityIds.has(interest.opportunityId)).length;
+  const navigation = brandNavigation.map((item) => item.path === "/brand/deals" ? { ...item, badge: activeDealCount ? String(activeDealCount) : null } : item.path === "/brand/campaigns" ? { ...item, badge: activeCampaignCount ? String(activeCampaignCount) : null } : item.path === "/brand/interests" ? { ...item, badge: interestCount ? String(interestCount) : null } : item);
   const current = navigation.find((item) => item.end ? pathname === item.path : pathname.startsWith(item.path) || (item.relatedPrefix && pathname.startsWith(item.relatedPrefix)));
 
   return (
@@ -84,6 +88,7 @@ export function BrandShell() {
                 <strong>Rooted Foods India</strong>
                 <p>Meera Kapoor · Campaign Manager</p>
                 <small>Profile settings will be connected later.</small>
+                <ProfileExitButton roleLabel="Brand" />
               </div>
             </details>
           </div>

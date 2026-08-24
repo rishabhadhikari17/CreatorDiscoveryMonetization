@@ -4,6 +4,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import creatorHero from "../../assets/regional-creator-hero.jpg";
 import { filterLabels, filterOptions, suggestions } from "./data/creators.js";
 import { emptyFilters, formatAudience, formatRate, getResults, parseCampaignQuery } from "./creatorSearch.js";
 import "./CreatorDiscoveryPage.css";
@@ -31,7 +32,13 @@ function FilterControl({ filterKey, value, onChange, chip = false }) {
 function CreatorCard({ creator, saved, onSave }) {
   return (
     <article className="discovery-creator-card">
-      <div className="discovery-creator-card__accent" aria-hidden="true" />
+      {creator.id === "priya-kumari" && (
+        <img
+          className="discovery-creator-card__photo"
+          src={creatorHero}
+          alt="Priya filming a regional recipe in her home kitchen"
+        />
+      )}
       <header className="discovery-creator-card__header">
         <div className="discovery-creator-card__avatar" aria-hidden="true"><strong>{creator.initials}</strong><span>{creator.script}</span></div>
         <div className="discovery-creator-card__identity">

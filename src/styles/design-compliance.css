@@ -1,0 +1,107 @@
+/* Final UI/UX guardrail layer derived from the project DESIGN.md.
+   It keeps page-specific art direction while enforcing shared usability rules. */
+
+html {
+  color-scheme: light;
+}
+
+body {
+  overflow-wrap: break-word;
+}
+
+:where(button, a, summary, input, select, textarea) {
+  touch-action: manipulation;
+}
+
+:where(.button, .site-header__join, .marketplace-search__action) {
+  min-height: var(--control-height);
+}
+
+:where(
+  .notification-popover > summary,
+  .creator-notifications > summary,
+  .brand-sidebar__support > button,
+  .creator-sidebar__support > button,
+  .profile-popover > summary,
+  .creator-profile-menu > summary,
+  .save-creator,
+  .view-creator,
+  .mobile-filter-button,
+  .search-suggestions button,
+  .opportunity-view-tabs button,
+  .profile-editor-nav a,
+  .profile-section-nav a
+) {
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+}
+
+/* Marketplace metadata remains readable across dense brand and creator views. */
+.brand-content :where(small, dt),
+.creator-content :where(small, dt) {
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.brand-content article > p,
+.creator-content article > p {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.brand-content :where([class*="eyebrow"], [class*="status"], [class*="label"]),
+.creator-content :where([class*="eyebrow"], [class*="status"], [class*="label"]) {
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+/* Long data regions stay usable rather than compressing into unreadable grids. */
+:where(.dashboard-layout, .offer-workspace, .campaign-execution-layout, .deal-room-layout) {
+  min-width: 0;
+}
+
+:where(table, .data-table) {
+  font-variant-numeric: tabular-nums;
+}
+
+:where(.metric-card, .creator-value-card, .dashboard-panel, .opportunity-card) strong {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Glass must retain a solid fallback and a visible boundary. */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  :where(
+    .site-header,
+    .brand-topbar,
+    .creator-topbar,
+    .brand-sidebar,
+    .marketplace-search,
+    .dashboard-panel,
+    .opportunity-card,
+    .offer-detail-panel,
+    .profile-editor-panel
+  ) {
+    background-color: rgba(255, 255, 255, 0.96);
+  }
+}
+
+@media (max-width: 743px) {
+  :where(input, select, textarea) {
+    font-size: 1rem;
+  }
+
+  .brand-content,
+  .creator-content {
+    padding-inline: 1rem;
+  }
+}
+
+@media (forced-colors: active) {
+  :where(.metric-card, .creator-value-card, .dashboard-panel, .opportunity-card, .button) {
+    border: 1px solid CanvasText;
+  }
+
+  :where(.button, button, a, summary):focus-visible {
+    outline-color: Highlight;
+  }
+}

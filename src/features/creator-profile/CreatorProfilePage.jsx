@@ -4,6 +4,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import creatorHero from "../../assets/regional-creator-hero.jpg";
 import { formatAudience, formatRate } from "../creator-discovery/creatorSearch.js";
 import { getCreatorProfile } from "./data/creatorProfiles.js";
 import "./CreatorProfilePage.css";
@@ -41,7 +42,7 @@ export function CreatorProfilePage() {
   const creator = getCreatorProfile(creatorId);
   const [saved, setSaved] = useState(creatorId === "priya-kumari");
 
-  if (!creator) {
+  if (!creator || creator.profileVisible === false) {
     return (
       <main className="profile-not-found">
         <span>Creator unavailable</span><h2>We couldn’t find this profile.</h2>
@@ -49,6 +50,8 @@ export function CreatorProfilePage() {
       </main>
     );
   }
+
+  const creatorImage = creator.avatarDataUrl || (creator.id === "priya-kumari" ? creatorHero : null);
 
   return (
     <main className="creator-profile">
@@ -58,17 +61,18 @@ export function CreatorProfilePage() {
 
       <section className="creator-profile-hero">
         <div className="creator-profile-hero__identity">
-          <div className="profile-avatar" aria-hidden="true"><strong>{creator.initials}</strong><span>{creator.script}</span></div>
+          <div className="profile-avatar" aria-hidden="true">{creatorImage ? <img src={creatorImage} alt="" /> : <strong>{creator.initials}</strong>}<span>{creator.script}</span></div>
           <div>
             <p>{creator.language} creator · {creator.niche}</p>
             <h2>{creator.name} <BadgeCheck size={22} aria-label="Verified creator" /></h2>
             <span>{creator.handle}</span>
+            {creator.secondaryNiches.length > 0 && <div className="public-profile-niches"><span>{creator.niche}</span>{creator.secondaryNiches.map((niche) => <span key={niche}>{niche}</span>)}</div>}
             <div className="profile-meta"><span><MapPin size={14} />{creator.district}, {creator.state}</span><span><Languages size={14} />{creator.languages.join(" + ")}</span><span className="profile-available"><i />{creator.availability}</span></div>
           </div>
         </div>
         <div className="creator-profile-hero__actions">
           <button className={`button profile-save${saved ? " is-saved" : ""}`} type="button" onClick={() => setSaved((current) => !current)} aria-pressed={saved}><Star size={17} fill={saved ? "currentColor" : "none"} />{saved ? "Saved to shortlist" : "Save to shortlist"}</button>
-          <Link className="button button--primary" to={`/brand/deals?creator=${creator.id}`}>Start a fair offer</Link>
+          {creator.acceptingOffers ? <Link className="button button--primary" to={`/brand/deals?creator=${creator.id}`}>Start a fair offer</Link> : <button className="button button--primary" type="button" disabled>Not accepting offers</button>}
         </div>
       </section>
 
@@ -161,7 +165,7 @@ export function CreatorProfilePage() {
             <li><Users size={15} /><span><strong>{formatAudience(creator.audience)} community</strong>Across {creator.platforms.length} active platforms</span></li>
           </ul>
           <div className="commercial-benchmark"><IndianRupee size={17} /><span><strong>Based on {creator.cohortSize} comparable creators</strong>Similar language, niche, location, and reach</span></div>
-          <Link className="button button--primary" to={`/brand/deals?creator=${creator.id}`}>Start a fair offer</Link>
+          {creator.acceptingOffers ? <Link className="button button--primary" to={`/brand/deals?creator=${creator.id}`}>Start a fair offer</Link> : <button className="button button--primary" type="button" disabled>Not accepting offers</button>}
           <small>Pricing excludes paid-media usage and exclusivity.</small>
         </aside>
       </div>

@@ -12,6 +12,8 @@ export function RoleSwitcher() {
   const isRolePage = pathname === "/brand" || pathname === "/creator";
   const isWorkspace = pathname.startsWith("/brand") || pathname.startsWith("/creator");
 
+  if (pathname.startsWith("/onboarding")) return null;
+
   return (
     <nav
       className={`role-switcher${isRolePage ? " role-switcher--prominent" : ""}${isWorkspace ? " role-switcher--workspace" : ""}`}

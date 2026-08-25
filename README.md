@@ -1,6 +1,6 @@
-# Creator Discovery & Monetization
+# GlobalGalli — Creator Discovery & Monetization
 
-A polished, frontend-first marketplace for regional creator discovery, campaign collaboration, and monetization. GlobalGalli and Vistaar are working names for the same product.
+A polished, frontend-first marketplace for regional creator discovery, campaign collaboration, and monetization.
 
 ## Current implementation
 
@@ -14,17 +14,20 @@ Steps 1–13 from `steps.md` are implemented:
 - Campaign execution, deliverable status, and payment tracking
 - Responsive navigation, reusable UI primitives, empty states, and demo polish
 
-This phase uses realistic mock data and browser storage. Authentication, backend services, live social-platform data, AI integrations, and real payments are intentionally deferred.
+Most screens use realistic mock data and browser storage. Creator discovery can now use the Supabase `search_creators` RPC; it keeps the local creator dataset as a visible fallback when Supabase is not configured or the user has no authenticated session. Live social-platform data, AI integrations, and real payments remain deferred.
 
 ## Main routes
 
 - `/` — Landing page and role selection
+- `/onboarding` — Creator and Brand profile onboarding
 - `/brand` — Brand dashboard
 - `/brand/discover` — Creator discovery
 - `/brand/shortlist` — Shortlist and campaign brief
 - `/brand/campaigns` — Campaign execution
+- `/brand/interests` — Creator interest inbox for posted campaigns
 - `/brand/deals` — Deal room
 - `/creator` — Creator dashboard
+- `/creator/opportunities` — Open brand campaigns and interest sharing
 - `/creator/offers` — Creator offer workflow
 - `/creator/collaborations` — Deliverables and payment tracking
 - `/design-system` — Shared UI foundation
@@ -46,6 +49,8 @@ src/
 npm install
 npm run dev
 ```
+
+To use live creator search, copy `.env.example` to `.env.local`, set the Supabase URL and publishable key, apply the migrations, and sign in with a Supabase user. Without that setup, `/brand/discover` remains fully usable with local demo data.
 
 ## Validate
 

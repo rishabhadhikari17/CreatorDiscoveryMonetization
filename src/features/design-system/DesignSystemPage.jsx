@@ -7,28 +7,28 @@ import "./DesignSystemPage.css";
 
 const palette = [
   {
-    color: "#FFF7EB",
-    name: "Canvas",
+    color: "#FFFDF9",
+    name: "Warm canvas",
     token: "--color-cream-50",
     usage: "Primary page background and breathing space.",
     darkText: true,
   },
   {
-    color: "#F9F0E0",
-    name: "Surface",
+    color: "#F6F4EF",
+    name: "Soft surface",
     token: "--color-cream-100",
     usage: "Cards, panels, and subtle section separation.",
     darkText: true,
   },
   {
-    color: "#A2AB73",
+    color: "#9AA67A",
     name: "Community",
     token: "--color-olive-500",
     usage: "Trust signals, positive states, and secondary actions.",
     darkText: true,
   },
   {
-    color: "#CC3A63",
+    color: "#D6385F",
     name: "Value",
     token: "--color-rose-600",
     usage: "Primary actions, highlights, and fair-value moments.",
@@ -44,6 +44,9 @@ export function DesignSystemPage() {
             <span>V</span>
             <strong>GlobalGalli</strong>
             <small>working title</small>
+            <span>G</span>
+            <strong>GlobalGallihttps://github.com/rishabhadhikari17/CreatorDiscoveryMonetization/pull/2/conflict?name=src%252Ffeatures%252Fdesign-system%252FDesignSystemPage.jsx&ancestor_oid=cab06befc9370e2c300f10acd19b6b1d53910f8a&base_oid=883756b688bf8ecfc66d749382bf7b95dbfbf1e4&head_oid=b4315ed24c686f2544677e0ab9f35c98019999c5li</strong>
+            <small>creator network</small>
           </a>
           <div className="ds-header__meta">
             <span>Foundation</span>
@@ -70,10 +73,10 @@ export function DesignSystemPage() {
         </div>
 
         <div className="palette-tile" aria-label="Brand palette preview">
-          <div style={{ backgroundColor: "#FFF7EB" }} />
-          <div style={{ backgroundColor: "#F9F0E0" }} />
-          <div style={{ backgroundColor: "#A2AB73" }} />
-          <div style={{ backgroundColor: "#CC3A63" }} />
+          <div style={{ backgroundColor: "#FFFDF9" }} />
+          <div style={{ backgroundColor: "#F6F4EF" }} />
+          <div style={{ backgroundColor: "#9AA67A" }} />
+          <div style={{ backgroundColor: "#D6385F" }} />
           <span>Four colors.<br />One clear voice.</span>
         </div>
       </section>
@@ -83,11 +86,11 @@ export function DesignSystemPage() {
           <div className="ds-section__heading">
             <div>
               <p className="eyebrow">01 · Color</p>
-              <h2 className="section-title">The supplied palette, translated into reusable product tokens.</h2>
+              <h2 className="section-title">A restrained marketplace palette with clear semantic roles.</h2>
             </div>
             <p>
-              Cream creates calm, olive communicates community trust, and rose
-              brings attention to value and action.
+              Warm neutrals keep the product calm, olive communicates community
+              trust, and a single rose accent carries value and action.
             </p>
           </div>
           <div className="swatch-grid">
@@ -105,14 +108,14 @@ export function DesignSystemPage() {
             <h2 className="section-title">Editorial warmth with practical clarity.</h2>
           </div>
           <p>
-            Display type carries the human story. Sans serif body type keeps dense
-            creator and campaign information easy to scan.
+            One humanist sans family carries both story and product information,
+            keeping dense creator and campaign data easy to scan.
           </p>
         </div>
 
         <div className="type-specimen">
           <div className="type-specimen__display">
-            <span>Display · Georgia</span>
+            <span>Display · Humanist system sans</span>
             <p>Regional influence should feel visible.</p>
           </div>
           <div className="type-specimen__body">

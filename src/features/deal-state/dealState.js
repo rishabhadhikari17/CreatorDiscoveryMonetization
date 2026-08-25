@@ -1,9 +1,19 @@
 import { creatorOffers } from "../creator-offers/data/creatorOffers.js";
 import { creators } from "../creator-discovery/data/creators.js";
 import { createCampaignFromDeal, createInitialCampaigns, demoPerformance } from "../campaign-execution/campaignData.js";
+import { createInitialInterests, createInitialOpportunities } from "../campaign-opportunities/data/campaignOpportunities.js";
 
 export const DEAL_STORAGE_KEY = "globalgalli-connected-marketplace-v2";
 export const DEAL_STATE_VERSION = 2;
+const PREVIOUS_BRAND_PREFIX = ["global", "galli"].join("");
+
+export const DEAL_STORAGE_KEY = "globalgalli-connected-marketplace-v3";
+export const LEGACY_DEAL_STORAGE_KEYS = [
+  `${PREVIOUS_BRAND_PREFIX}-connected-marketplace-v3`,
+  `${PREVIOUS_BRAND_PREFIX}-connected-marketplace-v2`,
+  "vaani-connected-marketplace-v2",
+];
+export const DEAL_STATE_VERSION = 3;
 
 export const VALID_DEAL_TRANSITIONS = {
   draft: ["sent"],
@@ -84,6 +94,8 @@ export function createInitialDealState() {
     version: DEAL_STATE_VERSION,
     deals: [...creatorDeals, ...brandDrafts],
     campaigns: createInitialCampaigns(),
+    opportunities: createInitialOpportunities(),
+    interests: createInitialInterests(),
   };
 }
 
@@ -245,6 +257,23 @@ export function dealReducer(state, action) {
       return {
         ...state,
         campaigns: state.campaigns.map((item) => item.id === action.id ? { ...item, rating: action.rating, feedback: action.feedback, activity: [{ actor: "brand", title: "Rooted Foods rated the collaboration", detail: `${action.rating}/5 · ${action.feedback}`, time: "Just now" }, ...item.activity] } : item),
+      };
+    }
+    case "SHARE_INTEREST": {
+      const opportunity = state.opportunities.find((item) => item.id === action.opportunityId);
+      const alreadyShared = state.interests.some((item) => item.opportunityId === action.opportunityId && item.creatorId === action.creatorId);
+      if (!opportunity || opportunity.status !== "open" || alreadyShared) return state;
+      return {
+        ...state,
+        interests: [{
+          id: `interest-${action.opportunityId}-${action.creatorId}`,
+          opportunityId: action.opportunityId,
+          creatorId: action.creatorId,
+          message: action.message,
+          sharedAt: "Just now",
+          status: "new",
+          match: opportunity.match,
+        }, ...state.interests],
       };
     }
     case "HYDRATE":

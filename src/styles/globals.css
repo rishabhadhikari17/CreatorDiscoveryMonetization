@@ -7,22 +7,23 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible {
-  outline: 3px solid var(--color-rose-600);
+:where(button, a, summary, input, select, textarea):focus-visible {
+  outline: 3px solid var(--color-focus);
   outline-offset: 3px;
 }
 
-textarea:focus-visible {
-  outline: 3px solid var(--color-rose-600);
-  outline-offset: 3px;
+::selection {
+  background: rgba(214, 56, 95, 0.2);
+  color: var(--color-ink-900);
+}
+
+:where(button, input, select, textarea):disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
 }
 
 .brand-content > *, .creator-content > * { animation: workspace-enter 260ms ease-out both; }
-.button, button, a { transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease; }
-.button:not(:disabled):active, button:not(:disabled):active { transform: translateY(1px) scale(0.99); }
+.button, button, a, summary { transition: color var(--motion-fast) ease, background-color var(--motion-fast) ease, border-color var(--motion-fast) ease, box-shadow var(--motion-fast) ease; }
 
 @keyframes workspace-enter { from { opacity: 0; transform: translateY(6px); } }
 
@@ -54,9 +55,9 @@ textarea:focus-visible {
   margin-top: var(--space-4);
   font-family: var(--font-display);
   font-size: var(--text-xl);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 1.1;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
 }
 
 .visually-hidden {
@@ -80,6 +81,8 @@ textarea:focus-visible {
   *::before,
   *::after {
     scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }

@@ -5,7 +5,7 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
-  globalIgnores(["dist/**", "creator-platform/**"]),
+  globalIgnores(["dist/**", "creator-platform/**", "OnboardingForms/**"]),
   {
     files: ["**/*.{js,jsx}"],
     extends: [js.configs.recommended, reactHooks.configs.flat.recommended],

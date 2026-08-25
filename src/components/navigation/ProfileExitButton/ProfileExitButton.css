@@ -1,0 +1,44 @@
+.profile-exit-button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.85rem;
+  padding: 0.75rem 0 0;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-rose-700);
+  cursor: pointer;
+  text-align: left;
+}
+
+.profile-exit-button > svg {
+  flex: 0 0 auto;
+}
+
+.profile-exit-button > span {
+  min-width: 0;
+}
+
+.profile-exit-button > span > strong,
+.profile-exit-button > span > small {
+  display: block;
+}
+
+.profile-exit-button > span > strong {
+  color: inherit;
+  font-size: 0.72rem;
+}
+
+.profile-exit-button > span > small {
+  margin-top: 0.08rem;
+  color: var(--color-ink-500);
+  font-size: 0.6rem;
+  font-weight: 500;
+}
+
+.profile-exit-button:hover {
+  color: var(--color-rose-600);
+  transform: translateX(2px);
+}

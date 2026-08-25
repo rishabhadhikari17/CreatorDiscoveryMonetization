@@ -5,49 +5,20 @@
   width: fit-content;
 }
 
-.brand-wordmark__mark {
-  display: grid;
-  width: 2.35rem;
-  height: 2.35rem;
-  place-items: center;
-  border-radius: 50% 50% 50% 0.4rem;
-  background: var(--color-rose-600);
-  color: var(--color-white);
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  transform: rotate(-5deg);
+.brand-wordmark__image {
+  display: block;
+  width: 9.75rem;
+  height: auto;
 }
 
-.brand-wordmark__name {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: -0.035em;
-}
-
-.brand-wordmark__note {
-  padding-left: 0.65rem;
-  border-left: 1px solid var(--color-border);
-  color: var(--color-ink-500);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  line-height: 1.15;
-  text-transform: uppercase;
-}
-
-.brand-wordmark--inverted {
-  color: var(--color-cream-50);
-}
-
-.brand-wordmark--inverted .brand-wordmark__note {
-  border-color: rgba(255, 247, 235, 0.24);
-  color: rgba(255, 247, 235, 0.62);
+.brand-wordmark--inverted .brand-wordmark__image {
+  padding-inline: 0.35rem;
+  border-radius: 0.7rem;
+  background: var(--color-cream-50);
 }
 
 @media (max-width: 420px) {
-  .brand-wordmark__note {
-    display: none;
+  .brand-wordmark__image {
+    width: 9rem;
   }
 }

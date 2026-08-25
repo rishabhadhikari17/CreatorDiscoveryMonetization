@@ -2,17 +2,18 @@ import {
   ArrowRight, CalendarDays, Check, ChevronRight, CircleAlert, CircleCheck,
   IndianRupee, Lightbulb, MapPin, Sparkles, TrendingUp, Users, WalletCards,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import creatorHero from "../../assets/regional-creator-hero.jpg";
 import { formatAudience, formatRate } from "../creator-discovery/creatorSearch.js";
 import { getCreatorProfile } from "../creator-profile/data/creatorProfiles.js";
+import { CREATOR_PROFILE_UPDATED_EVENT, getProfileCompletion, readCreatorProfileEdits } from "../creator-profile/creatorProfileStorage.js";
 import { formatMoney } from "../campaign-brief/campaignMatching.js";
 import { useDealState } from "../deal-state/DealStateContext.js";
 import { getOfferPosition } from "../creator-offers/counterOfferRules.js";
 import { earningsMonths, improvementSuggestions } from "./data/creatorDashboardData.js";
 import "./CreatorDashboardPage.css";
 
-const creator = getCreatorProfile("priya-kumari");
 const maxEarnings = Math.max(...earningsMonths.map((item) => item.amount));
 
 function PanelHeading({ eyebrow, title, link, linkLabel }) {
@@ -20,6 +21,11 @@ function PanelHeading({ eyebrow, title, link, linkLabel }) {
 }
 
 export function CreatorDashboardPage() {
+  const [creator, setCreator] = useState(() => getCreatorProfile("priya-kumari"));
+  const [profileCompletion, setProfileCompletion] = useState(() => {
+    const savedProfile = readCreatorProfileEdits("priya-kumari");
+    return savedProfile ? getProfileCompletion(savedProfile) : 94;
+  });
   const { deals, campaigns } = useDealState();
   const currentOffers = deals.filter((deal) => deal.creatorId === "priya-kumari" && ["sent", "editing", "countered"].includes(deal.dealStatus)).map((deal) => ({
     ...deal,
@@ -42,14 +48,23 @@ export function CreatorDashboardPage() {
     nextCopy: campaign.status === "creating" ? "Open the collaboration to submit a demo draft." : "Open the shared campaign record for the latest action.",
   }));
   const [completedTips, setCompletedTips] = useState([]);
-  const completeness = Math.min(100, 82 + completedTips.length * 6);
+  const completeness = Math.min(100, profileCompletion + completedTips.length * 2);
   const toggleTip = (id) => setCompletedTips((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
+
+  useEffect(() => {
+    const refreshProfile = (event) => {
+      setCreator(getCreatorProfile("priya-kumari"));
+      if (event.detail?.profile) setProfileCompletion(getProfileCompletion(event.detail.profile));
+    };
+    window.addEventListener(CREATOR_PROFILE_UPDATED_EVENT, refreshProfile);
+    return () => window.removeEventListener(CREATOR_PROFILE_UPDATED_EVENT, refreshProfile);
+  }, []);
 
   return (
     <main className="creator-dashboard">
       <header className="creator-dashboard__welcome">
         <div><p className="eyebrow">Tuesday · 11 August</p><h2>Namaste, Priya.</h2><p>Your community value, opportunities, and earnings—all in one place.</p></div>
-        <Link className="profile-completeness" to="/creator/profile"><div className="profile-completeness__ring" style={{ "--completion-angle": `${completeness * 3.6}deg` }}><span>{completeness}%</span></div><div><span>Profile strength</span><strong>{completeness === 100 ? "Complete" : "Nearly there"}</strong><small>{100 - completeness}% left to complete</small></div><ChevronRight size={16} /></Link>
+        <Link className="profile-completeness" to="/creator/profile"><img className="profile-completeness__photo" src={creator.avatarDataUrl || creatorHero} alt="" /><div className="profile-completeness__ring" style={{ "--completion-angle": `${completeness * 3.6}deg` }}><span>{completeness}%</span></div><div><span>Profile strength</span><strong>{completeness === 100 ? "Complete" : "Nearly there"}</strong><small>{100 - completeness}% left to complete</small></div><ChevronRight size={16} /></Link>
       </header>
 
       <section className="creator-value-grid" aria-label="Creator value summary">

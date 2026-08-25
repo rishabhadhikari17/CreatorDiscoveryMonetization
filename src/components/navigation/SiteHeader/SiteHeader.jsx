@@ -12,9 +12,14 @@ export function SiteHeader() {
           <a href="#creators">For creators</a>
           <a href="#how-it-works">How it works</a>
         </nav>
-        <Link className="site-header__demo" to="/brand">
-          Open demo <span aria-hidden="true">→</span>
-        </Link>
+        <div className="site-header__actions">
+          <Link className="site-header__demo" to="/brand">
+            Open demo <span aria-hidden="true">→</span>
+          </Link>
+          <Link className="site-header__join" to="/onboarding">
+            Join GlobalGalli
+          </Link>
+        </div>
       </div>
     </header>
   );

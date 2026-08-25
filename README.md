@@ -1,6 +1,6 @@
 # Creator Discovery & Monetization
 
-A polished, frontend-first marketplace for regional creator discovery, campaign collaboration, and monetization. Vaani and Vistaar are working names for the same product.
+A polished, frontend-first marketplace for regional creator discovery, campaign collaboration, and monetization. GlobalGalli and Vistaar are working names for the same product.
 
 ## Current implementation
 

@@ -40,9 +40,9 @@ export function DesignSystemPage() {
     <main className="design-system">
       <header className="ds-header">
         <div className="page-shell ds-header__inner">
-          <a className="wordmark" href="#top" aria-label="Vaani design system home">
+          <a className="wordmark" href="#top" aria-label="GlobalGalli design system home">
             <span>V</span>
-            <strong>Vaani</strong>
+            <strong>GlobalGalli</strong>
             <small>working title</small>
           </a>
           <div className="ds-header__meta">

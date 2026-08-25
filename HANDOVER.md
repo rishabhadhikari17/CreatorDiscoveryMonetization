@@ -1,4 +1,4 @@
-# Vaani Creator Platform — Engineering Handover
+# GlobalGalli Creator Platform — Engineering Handover
 
 A creator discovery and monetization marketplace for Indian regional creators.
 

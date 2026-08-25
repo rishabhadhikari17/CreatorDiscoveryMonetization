@@ -2,7 +2,7 @@ import { creatorOffers } from "../creator-offers/data/creatorOffers.js";
 import { creators } from "../creator-discovery/data/creators.js";
 import { createCampaignFromDeal, createInitialCampaigns, demoPerformance } from "../campaign-execution/campaignData.js";
 
-export const DEAL_STORAGE_KEY = "vaani-connected-marketplace-v2";
+export const DEAL_STORAGE_KEY = "globalgalli-connected-marketplace-v2";
 export const DEAL_STATE_VERSION = 2;
 
 export const VALID_DEAL_TRANSITIONS = {

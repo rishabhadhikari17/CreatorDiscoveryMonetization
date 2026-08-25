@@ -1,4 +1,4 @@
-# Vaani backend schema
+# GlobalGalli backend schema
 
 Postgres schema for the creator discovery and monetization platform, derived from the
 data modules under `src/features/**/data`.
@@ -15,7 +15,7 @@ supabase db reset  # applies every migration in order, then runs seed.sql
 — but **do not** run `seed.sql` there: it inserts demo accounts into `auth.users`
 with a known password.
 
-Demo logins after seeding: `brand@vaani.test` and `priya@vaani.test`, password
+Demo logins after seeding: `brand@globalgalli.test` and `priya@globalgalli.test`, password
 `demo-password`.
 
 ## Migrations

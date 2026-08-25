@@ -366,11 +366,11 @@ insert into auth.users (
   created_at, updated_at, raw_app_meta_data, raw_user_meta_data
 ) values
   ('00000000-0000-0000-0000-000000000000', '11111111-1111-1111-1111-111111111111',
-   'authenticated', 'authenticated', 'brand@vaani.test',
+   'authenticated', 'authenticated', 'brand@globalgalli.test',
    extensions.crypt('demo-password', extensions.gen_salt('bf')), now(), now(), now(),
    '{"provider":"email","providers":["email"]}', '{}'),
   ('00000000-0000-0000-0000-000000000000', '22222222-2222-2222-2222-222222222222',
-   'authenticated', 'authenticated', 'priya@vaani.test',
+   'authenticated', 'authenticated', 'priya@globalgalli.test',
    extensions.crypt('demo-password', extensions.gen_salt('bf')), now(), now(), now(),
    '{"provider":"email","providers":["email"]}', '{}');
 
@@ -379,7 +379,7 @@ select u.id, u.id, u.id::text,
   jsonb_build_object('sub', u.id::text, 'email', u.email, 'email_verified', true),
   'email', now(), now(), now()
 from auth.users u
-where u.email in ('brand@vaani.test', 'priya@vaani.test');
+where u.email in ('brand@globalgalli.test', 'priya@globalgalli.test');
 
 insert into profiles (id, role, display_name, avatar_initials) values
   ('11111111-1111-1111-1111-111111111111', 'brand',   'Ananya Mehta', 'AM'),

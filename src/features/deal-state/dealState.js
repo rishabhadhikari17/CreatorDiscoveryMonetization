@@ -3,7 +3,9 @@ import { creators } from "../creator-discovery/data/creators.js";
 import { createCampaignFromDeal, createInitialCampaigns, demoPerformance } from "../campaign-execution/campaignData.js";
 import { createInitialInterests, createInitialOpportunities } from "../campaign-opportunities/data/campaignOpportunities.js";
 
-const PREVIOUS_BRAND_PREFIX = ["global", "gali"].join("");
+export const DEAL_STORAGE_KEY = "globalgalli-connected-marketplace-v2";
+export const DEAL_STATE_VERSION = 2;
+const PREVIOUS_BRAND_PREFIX = ["global", "galli"].join("");
 
 export const DEAL_STORAGE_KEY = "globalgalli-connected-marketplace-v3";
 export const LEGACY_DEAL_STORAGE_KEYS = [

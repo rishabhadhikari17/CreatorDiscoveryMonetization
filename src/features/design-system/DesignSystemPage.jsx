@@ -41,8 +41,11 @@ export function DesignSystemPage() {
       <header className="ds-header">
         <div className="page-shell ds-header__inner">
           <a className="wordmark" href="#top" aria-label="GlobalGalli design system home">
-            <span>G</span>
+            <span>V</span>
             <strong>GlobalGalli</strong>
+            <small>working title</small>
+            <span>G</span>
+            <strong>GlobalGallihttps://github.com/rishabhadhikari17/CreatorDiscoveryMonetization/pull/2/conflict?name=src%252Ffeatures%252Fdesign-system%252FDesignSystemPage.jsx&ancestor_oid=cab06befc9370e2c300f10acd19b6b1d53910f8a&base_oid=883756b688bf8ecfc66d749382bf7b95dbfbf1e4&head_oid=b4315ed24c686f2544677e0ab9f35c98019999c5li</strong>
             <small>creator network</small>
           </a>
           <div className="ds-header__meta">

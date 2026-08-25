@@ -1,4 +1,4 @@
--- Vaani creator platform — enums, lookup tables, and scoring config.
+-- GlobalGalli creator platform — enums, lookup tables, and scoring config.
 --
 -- Money convention: every money column is whole Indian rupees stored as `integer`.
 -- Never paise, never float. The fair-band and estimate maths round to the nearest
